@@ -1,0 +1,5 @@
+name: XPLib
+version: '${version}'
+main: me.xpyex.plugin.xplib.bukkit.XPLib
+api-version: 1.16
+authors: [ XPYEX ]
