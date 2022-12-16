@@ -1,4 +1,4 @@
-package me.xpyex.plugin.xplib.bukkit.util;
+package me.xpyex.plugin.xplib.bukkit.util.strings;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import java.io.File;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

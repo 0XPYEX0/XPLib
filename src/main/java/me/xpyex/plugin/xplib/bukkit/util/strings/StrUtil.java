@@ -1,4 +1,4 @@
-package me.xpyex.plugin.xplib.bukkit.util;
+package me.xpyex.plugin.xplib.bukkit.util.strings;
 
 public class StrUtil {
     public static String getStrBetweenKeywords(String str, String key1, String key2) {

@@ -1,4 +1,4 @@
-package me.xpyex.plugin.xplib.bukkit.util;
+package me.xpyex.plugin.xplib.bukkit.util.files;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,6 +39,24 @@ public class FileUtil {
      * @throws Exception 文件异常
      */
     public static void writeFile(File target, String content, boolean attend) throws Exception {
+        while (!target.exists()) {
+            Throwable ex = null;
+            try {
+                target.createNewFile();
+            } catch (Throwable e) {
+                ex = e;
+            }
+            File parent = target;
+            while (ex != null) {
+                try {
+                    parent = parent.getParentFile();
+                    parent.mkdirs();
+                    ex = null;
+                } catch (Throwable e) {
+                    ex = e;
+                }
+            }
+        }
         PrintWriter out = new PrintWriter(target, "UTF-8");
         if (attend) {
             out.println(content);
