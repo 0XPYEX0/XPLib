@@ -8,6 +8,8 @@ import com.google.gson.JsonPrimitive;
 import java.io.File;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 
 public class NameUtil {
     private static final Gson GSON = new GsonBuilder()
@@ -33,5 +35,16 @@ public class NameUtil {
         else if (material.isItem()) return Util.getOrDefault(ZH_CN.get("item.minecraft." + material.toString().toLowerCase()), EMPTY_STR).getAsString();
 
         else return material.toString().toLowerCase();
+    }
+
+    public static String getTranslationName(EntityType type) {
+        if (type == null) return "";
+
+        return Util.getOrDefault(ZH_CN.get("entity.minecraft." + type.toString().toLowerCase()), EMPTY_STR).getAsString();
+    }
+
+    public static String getTranslationName(Entity entity) {
+        return getTranslationName(entity.getType());
+        //
     }
 }
