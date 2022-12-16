@@ -3,6 +3,7 @@ package me.xpyex.plugin.xplib.bukkit.util.config;
 import com.google.gson.JsonObject;
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
 import org.bukkit.plugin.Plugin;
 
@@ -26,7 +27,8 @@ public class ConfigUtil {
     }
 
     public static void reload(Plugin plugin) {
-        for (String s : CONFIGS.keySet()) {
+        HashMap<String, JsonObject> copied = new HashMap<>(CONFIGS);
+        for (String s : copied.keySet()) {
             if (s.startsWith(plugin.getName() + "_")) {
                 CONFIGS.remove(s);
             }
