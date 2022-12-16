@@ -26,7 +26,8 @@ public class ConfigUtil {
     }
 
     public static void reload(Plugin plugin) {
-        for (String s : CONFIGS.keySet()) {
+        HashMap<String, JsonObject> copied = new HashMap<>(CONFIGS);
+        for (String s : copied.keySet()) {
             if (s.startsWith(plugin.getName() + "_")) {
                 CONFIGS.remove(s);
             }
