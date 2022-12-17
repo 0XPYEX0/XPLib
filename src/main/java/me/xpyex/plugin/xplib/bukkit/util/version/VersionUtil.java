@@ -9,4 +9,8 @@ public class VersionUtil {
         return MAIN_VERSION;
         //
     }
+
+    public static String getServerVersion() {
+        return Bukkit.getVersion().split("-")[0];
+    }
 }
