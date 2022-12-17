@@ -1,5 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.util.version;
 
+import me.xpyex.plugin.xplib.bukkit.XPLib;
+import me.xpyex.plugin.xplib.bukkit.api.Version;
 import org.bukkit.Bukkit;
 
 public class VersionUtil {
@@ -12,5 +14,11 @@ public class VersionUtil {
 
     public static String getServerVersion() {
         return Bukkit.getVersion().split("-")[0];
+        //
+    }
+
+    public static boolean requireXPLib(Version version) {
+        return version.equals(new Version(XPLib.getInstance().getDescription().getVersion()));
+        //
     }
 }
