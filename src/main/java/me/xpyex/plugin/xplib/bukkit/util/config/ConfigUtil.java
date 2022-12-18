@@ -3,7 +3,6 @@ package me.xpyex.plugin.xplib.bukkit.util.config;
 import com.google.gson.JsonObject;
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
 import org.bukkit.plugin.Plugin;
 

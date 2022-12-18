@@ -1,6 +1,5 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
-import java.math.BigInteger;
 import java.util.TreeSet;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 

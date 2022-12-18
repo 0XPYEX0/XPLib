@@ -1,9 +1,10 @@
 package me.xpyex.plugin.xplib.bukkit.util.inventory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
+import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -32,5 +33,42 @@ public class ItemUtil {
         copied1.setAmount(1);
         copied2.setAmount(1);
         return copied1.toString().equals(copied2.toString());
+    }
+
+    public static boolean typeIsOr(Material target, Material... materials) {
+        if (target == null || materials == null || materials.length == 0) {
+            return false;
+        }
+
+        for (Material material : materials) {
+            if (target == material) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean typeIsOr(Material target, String... materials) {
+        return StrUtil.equalsIgnoreCaseOr(target.toString(), materials);
+        //
+    }
+
+    public static boolean typeIsOr(ItemStack stack, String... materials) {
+        return typeIsOr(stack.getType(), materials);
+        //
+    }
+
+    public static boolean typeIsOr(ItemStack stack, Material... materials) {
+        return typeIsOr(stack.getType(), materials);
+    }
+
+    public static boolean typeIsOr(Block block, Material... materials) {
+        return typeIsOr(block.getType(), materials);
+        //
+    }
+
+    public static boolean typeIsOr(Block block, String... materials) {
+        return typeIsOr(block.getType(), materials);
+        //
     }
 }

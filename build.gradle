@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.xpyex.plugin.xplib'
-version = '1.0.2'
+version = '1.0.3'
 
 repositories {
     mavenCentral()
@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    compileOnly 'org.jetbrains:annotations:23.1.0'
 }
 
 def targetJavaVersion = 8

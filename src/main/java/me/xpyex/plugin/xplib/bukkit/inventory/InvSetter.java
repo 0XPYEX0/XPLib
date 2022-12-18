@@ -1,13 +1,16 @@
-package me.xpyex.plugin.xplib.bukkit.api;
+package me.xpyex.plugin.xplib.bukkit.inventory;
 
 import java.util.HashMap;
+import me.xpyex.plugin.xplib.bukkit.inventory.button.Button;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 public class InvSetter {
     private final HashMap<String, ItemStack> signMap = new HashMap<>();
+    private final HashMap<String, Button> buttonMap = new HashMap<>();
     private final String[] pattern;
     private final Inventory inv;
 
@@ -29,6 +32,16 @@ public class InvSetter {
         //
     }
 
+    public void setSign(String sign, Material material) {
+        setSign(sign, new ItemStack(material));
+        //
+    }
+
+    public void setSign(String sign, Button button) {
+        setSign(sign, button.getButton());
+        buttonMap.put(sign, button);
+    }
+
     public Inventory getInv() {
         int slot;
         for (int i = 0; i < pattern.length; i++) {
@@ -39,6 +52,9 @@ public class InvSetter {
                     throw new IllegalStateException("存在未定义的符号: " + sign);
                 }
                 inv.setItem(slot, signMap.get(sign));
+                if (buttonMap.containsKey(sign)) {
+                    buttonMap.get(sign).getMenu().setButton(slot, buttonMap.get(sign));
+                }
                 slot++;
             }
         }

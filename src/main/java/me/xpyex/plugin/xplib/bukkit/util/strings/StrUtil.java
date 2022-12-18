@@ -30,7 +30,7 @@ public class StrUtil {
     }
 
     public static boolean containsIgnoreCaseOr(String str, String... keys) {
-        if (str == null || keys == null)  return false;
+        if (str == null || keys == null || keys.length == 0)  return false;
 
         for (String key : keys) {
             if (str.toLowerCase().contains(key.toLowerCase()))
@@ -40,9 +40,7 @@ public class StrUtil {
     }
 
     public static boolean equalsIgnoreCaseOr(String target, String... contents) {
-        if (target == null || contents == null) return false;
-
-        if (contents.length == 0) return false;
+        if (target == null || contents == null || contents.length == 0) return false;
 
         for (String s : contents) {
             if (s.equalsIgnoreCase(target))
