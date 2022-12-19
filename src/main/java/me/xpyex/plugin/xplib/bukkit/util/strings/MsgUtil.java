@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class MsgUtil {
     public static String getColorMsg(String msg) {
-        if (msg == null || msg.trim().isEmpty()) return "";
+        if (msg == null) return "";  //不检查trim，允许返回空格字符串
 
         return ChatColor.translateAlternateColorCodes('&', msg);
     }

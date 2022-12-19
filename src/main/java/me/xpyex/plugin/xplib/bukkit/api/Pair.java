@@ -18,4 +18,13 @@ public class Pair<K, V> {
         return value;
         //
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Pair<?, ?>) {
+            Pair<?, ?> pair = (Pair<?, ?>) o;
+            return this.getKey().equals(pair.getKey()) && this.getValue().equals(pair.getValue());
+        }
+        return false;
+    }
 }

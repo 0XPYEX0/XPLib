@@ -22,8 +22,10 @@ public final class XPLib extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        for (Menu menu : Menu.getMenus().values()) {
+            menu.getPlayer().closeInventory();
+        }
         getLogger().info("已卸载");
-        //
     }
 
     public static XPLib getInstance() {

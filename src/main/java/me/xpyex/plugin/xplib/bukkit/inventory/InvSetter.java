@@ -27,19 +27,19 @@ public class InvSetter {
         inv = Bukkit.createInventory(who, pattern.length * 9, title);
     }
 
-    public void setSign(String sign, ItemStack item) {
+    public InvSetter setSign(String sign, ItemStack item) {
         signMap.put(sign, item);
+        return this;
+    }
+
+    public InvSetter setSign(String sign, Material material) {
+        return setSign(sign, new ItemStack(material));
         //
     }
 
-    public void setSign(String sign, Material material) {
-        setSign(sign, new ItemStack(material));
-        //
-    }
-
-    public void setSign(String sign, Button button) {
-        setSign(sign, button.getButton());
+    public InvSetter setSign(String sign, Button button) {
         buttonMap.put(sign, button);
+        return setSign(sign, button.getButton());
     }
 
     public Inventory getInv() {
@@ -53,7 +53,7 @@ public class InvSetter {
                 }
                 inv.setItem(slot, signMap.get(sign));
                 if (buttonMap.containsKey(sign)) {
-                    buttonMap.get(sign).getMenu().setButton(slot, buttonMap.get(sign));
+                    buttonMap.get(sign).getMenu().setButton(this, slot, buttonMap.get(sign));
                 }
                 slot++;
             }

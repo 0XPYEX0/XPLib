@@ -43,7 +43,7 @@ public class HandleMenu implements Listener {
 
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
-        Menu.close((Player) event.getPlayer());
+        Menu.closed((Player) event.getPlayer());
         //
     }
 }

@@ -48,6 +48,9 @@ public class FileUtil {
             }
             File parent = target;
             while (ex != null) {
+                if (parent == null) {
+                    throw new IllegalStateException("无法创建文件 + " + target.getPath() + " ,原因可能是Java没有访问权限");
+                }
                 try {
                     parent = parent.getParentFile();
                     parent.mkdirs();
