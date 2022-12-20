@@ -19,7 +19,14 @@ public class HandleMenu implements Listener {
         if (menu == null) {
             return;
         }
-        if (event.getClickedInventory() == null || event.getClickedInventory() == event.getWhoClicked().getInventory()) {
+        if (event.getClickedInventory() == null) {
+            event.setCancelled(true);
+            return;
+        }
+        if (event.getClickedInventory() == event.getWhoClicked().getInventory()) {
+            if (event.isShiftClick()) {
+                event.setCancelled(true);  //不允许用Shift把东西放入菜单
+            }
             return;
         }
         Button button = menu.getButton(event.getSlot());
