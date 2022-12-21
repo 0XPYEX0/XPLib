@@ -19,6 +19,7 @@ public class Menu {
 
     public Menu(Player player) {
         this.player = player;
+        //
     }
 
     public Menu setPage(int page, InvSetter setter) {
@@ -33,7 +34,7 @@ public class Menu {
                 pattern.add("         ");
             }
         }
-        setters.put(page, new InvSetter(player, title, pattern.toArray(new String[0])).setSign(" ", Material.AIR));
+        setters.put(page, new InvSetter(title, pattern.toArray(new String[0])).setSign(" ", Material.AIR));
         return this;
     }
 

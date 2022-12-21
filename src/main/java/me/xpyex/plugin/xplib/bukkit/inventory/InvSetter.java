@@ -5,7 +5,6 @@ import me.xpyex.plugin.xplib.bukkit.inventory.button.Button;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 public class InvSetter {
@@ -14,7 +13,7 @@ public class InvSetter {
     private final String[] pattern;
     private final Inventory inv;
 
-    public InvSetter(InventoryHolder who, String title, String... pattern) {
+    public InvSetter(String title, String... pattern) {
         if (pattern.length > 6) {
             throw new IllegalArgumentException("超出GUI最大限度");
         }
@@ -24,7 +23,7 @@ public class InvSetter {
             }
         }
         this.pattern = pattern;
-        inv = Bukkit.createInventory(who, pattern.length * 9, title);
+        inv = Bukkit.createInventory(null, pattern.length * 9, title);
     }
 
     public InvSetter setSign(String sign, ItemStack item) {

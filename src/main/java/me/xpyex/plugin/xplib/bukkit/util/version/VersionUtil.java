@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 
 public class VersionUtil {
     private static final int MAIN_VERSION = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1]);
+    public static final Version VERSION = new Version(XPLib.getInstance().getDescription().getVersion());
 
     public static int getMainVersion() {
         return MAIN_VERSION;
@@ -18,7 +19,12 @@ public class VersionUtil {
     }
 
     public static boolean requireXPLib(Version version) {
-        return version.equals(new Version(XPLib.getInstance().getDescription().getVersion()));
+        return version.equals(VERSION);
+        //
+    }
+
+    public static Version getXPLibVersion() {
+        return VERSION;
         //
     }
 }

@@ -14,6 +14,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 public class HandleMenu implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+
         Player whoClicked = (Player) event.getWhoClicked();
         Menu menu = Menu.getOpeningMenu(whoClicked);
         if (menu == null) {
