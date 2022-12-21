@@ -19,7 +19,7 @@ public class ConfigUtil {
             try {
                 CONFIGS.put(plugin.getName() + "_" + config, GsonUtil.parseJsonObject(FileUtil.readFile(new File(plugin.getDataFolder(), config + ".json"))));
             } catch (Throwable e) {
-                throw new IllegalStateException(e);
+                new IllegalStateException(e).printStackTrace();
             }
         }
         return CONFIGS.get(plugin.getName() + "_" + config);

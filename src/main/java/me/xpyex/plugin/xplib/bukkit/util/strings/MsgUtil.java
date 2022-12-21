@@ -1,9 +1,11 @@
 package me.xpyex.plugin.xplib.bukkit.util.strings;
 
+import me.xpyex.plugin.xplib.bukkit.util.config.ConfigUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 public class MsgUtil {
     public static String getColorMsg(String msg) {
@@ -18,5 +20,15 @@ public class MsgUtil {
         } catch (Throwable e) {
             p.sendMessage(getColorMsg(text));
         }
+    }
+
+    public static void debugLog(Plugin plugin, String info) {
+        if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
+            plugin.getLogger().info("[Debug] " + info);
+    }
+
+    public static void debugLog(Plugin plugin, Throwable e) {
+        if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
+            e.printStackTrace();
     }
 }
