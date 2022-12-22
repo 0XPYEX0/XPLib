@@ -6,8 +6,10 @@ import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 public class Version {
     private final int[] versions;
     private final String betaInfo;
+    private final String ver;
 
     public Version(String ver) {
+        this.ver = ver;
         String mainVer;
         if (ver.contains("-")) {
             mainVer = ver.split("-")[0];
@@ -85,5 +87,9 @@ public class Version {
         }
 
         return 0;
+    }
+
+    public String getVersion() {
+        return ver;
     }
 }
