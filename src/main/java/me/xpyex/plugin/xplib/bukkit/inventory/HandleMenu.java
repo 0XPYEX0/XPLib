@@ -48,6 +48,7 @@ public class HandleMenu implements Listener {
                 event.getClickedInventory().setItem(event.getSlot(), returnItemEffect.returnItem(whoClicked, event.getClick(), event.getCurrentItem()));
             }
         }
+        menu.updateInventory();  //实时更新
     }
 
     @EventHandler
