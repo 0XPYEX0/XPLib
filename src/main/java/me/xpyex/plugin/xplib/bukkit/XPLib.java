@@ -2,6 +2,7 @@ package me.xpyex.plugin.xplib.bukkit;
 
 import me.xpyex.plugin.xplib.bukkit.inventory.HandleMenu;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
+import me.xpyex.plugin.xplib.bukkit.util.bstats.BStatsUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class XPLib extends JavaPlugin {
@@ -17,6 +18,10 @@ public final class XPLib extends JavaPlugin {
                 menu.updateInventory();
             }
         }, 0L, 5L);
+        getServer().getScheduler().runTaskAsynchronously(getInstance(), () -> {
+            BStatsUtil.hookWith();
+            getLogger().info("与bStats挂钩");
+        });
         getLogger().info("已加载");
     }
 

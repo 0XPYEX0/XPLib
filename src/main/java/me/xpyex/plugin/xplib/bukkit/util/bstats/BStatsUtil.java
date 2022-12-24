@@ -24,4 +24,8 @@ public class BStatsUtil {
         }));
         return metrics;
     }
+
+    public static Metrics hookWith() {
+        return new Metrics(XPLib.getInstance(), 17099);
+    }
 }
