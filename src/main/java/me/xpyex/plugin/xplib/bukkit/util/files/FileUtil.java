@@ -8,6 +8,33 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class FileUtil {
+    public static void createNewFile(File target, boolean replaced) throws Exception {
+        if (replaced) {
+            target.delete();
+        }
+        while (!target.exists()) {
+            Throwable ex = null;
+            try {
+                target.createNewFile();
+            } catch (Throwable e) {
+                ex = e;  //当没权限，或者文件所在的目录还未创建
+            }
+            File parent = target;  //先定义文件自身
+            while (ex != null) {  //此时文件尚未被创建，故尝试创建父文件夹
+                if (parent == null) {
+                    throw new IllegalStateException("无法创建文件 + " + target.getPath() + " ,原因可能是Java没有访问权限");
+                }
+                parent = parent.getParentFile();  //寻找所在目录
+                try {
+                    parent.mkdirs();  //尝试创建所在目录
+                    ex = null;  //打破第二个while
+                } catch (Throwable e) {
+                    ex = e;  //重启第二个while
+                }
+            }
+        }
+    }
+
     /**
      * 读取目标文本文件
      *
@@ -39,26 +66,8 @@ public class FileUtil {
      * @throws Exception 文件异常
      */
     public static void writeFile(File target, String content, boolean attend) throws Exception {
-        while (!target.exists()) {
-            Throwable ex = null;
-            try {
-                target.createNewFile();
-            } catch (Throwable e) {
-                ex = e;
-            }
-            File parent = target;
-            while (ex != null) {
-                if (parent == null) {
-                    throw new IllegalStateException("无法创建文件 + " + target.getPath() + " ,原因可能是Java没有访问权限");
-                }
-                try {
-                    parent = parent.getParentFile();
-                    parent.mkdirs();
-                    ex = null;
-                } catch (Throwable e) {
-                    ex = e;
-                }
-            }
+        if (!target.exists()) {
+            createNewFile(target, false);
         }
         PrintWriter out = new PrintWriter(target, "UTF-8");
         if (attend) {
