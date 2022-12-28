@@ -21,6 +21,9 @@ public class Pair<K, V> {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
         if (o instanceof Pair<?, ?>) {
             Pair<?, ?> pair = (Pair<?, ?>) o;
             return this.getKey().equals(pair.getKey()) && this.getValue().equals(pair.getValue());
