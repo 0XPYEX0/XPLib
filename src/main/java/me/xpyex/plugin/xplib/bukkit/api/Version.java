@@ -69,6 +69,10 @@ public class Version {
                 return 1;
             }
             if (version.versions[i] == this.versions[i]) {
+                if (i != versions.length - 1) {  //还没检查完的情况
+                    continue;
+                }
+                //往下就是主版本已经检查完了
                 if (version.betaInfo.equals(this.betaInfo)) {  //Beta版本是否一致
                     return 0;
                 }
@@ -91,5 +95,12 @@ public class Version {
 
     public String getVersion() {
         return ver;
+        //
+    }
+
+    @Override
+    public String toString() {
+        return ver;
+        //
     }
 }

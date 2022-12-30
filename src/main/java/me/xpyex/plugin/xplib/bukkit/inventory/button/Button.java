@@ -2,7 +2,6 @@ package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +29,7 @@ public abstract class Button {
     }
 
     public final ItemStack getButton() {
-        int i = condition.apply(menu.getPlayer(), ClickType.UNKNOWN);
+        int i = condition.apply(menu.getPlayer());
         if (!MODES.containsKey(i)) {
             throw new IllegalStateException("按钮不存在该状态: " + i);
         }

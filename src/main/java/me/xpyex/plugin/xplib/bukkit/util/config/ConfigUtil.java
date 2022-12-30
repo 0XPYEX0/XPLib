@@ -34,6 +34,11 @@ public class ConfigUtil {
         }
     }
 
+    public static void reload() {
+        CONFIGS.clear();
+        //
+    }
+
     public static void saveConfig(Plugin plugin, String config, String content, boolean replaced) {
         File f = new File(plugin.getDataFolder(), config + ".json");
         if (f.exists() && !replaced) return;

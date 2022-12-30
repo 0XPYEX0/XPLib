@@ -11,6 +11,6 @@ public class BStatsUtil {
     }
 
     public static Metrics hookWith() {
-        return new Metrics(XPLib.getInstance(), 17099);
+        return hookWith(XPLib.getInstance(), 17099);
     }
 }
