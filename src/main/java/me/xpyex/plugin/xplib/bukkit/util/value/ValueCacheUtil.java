@@ -48,4 +48,9 @@ public class ValueCacheUtil {
         }
         return null;
     }
+
+    public static <T> T getData(Plugin plugin, String key, Class<T> returnType) {
+        return getData(plugin, key);
+        //
+    }
 }
