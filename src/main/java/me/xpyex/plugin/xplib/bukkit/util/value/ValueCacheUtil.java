@@ -1,7 +1,9 @@
 package me.xpyex.plugin.xplib.bukkit.util.value;
 
 import java.util.HashMap;
+import java.util.Optional;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ValueCacheUtil {
@@ -40,16 +42,18 @@ public class ValueCacheUtil {
         //
     }
 
-    @Nullable
+    @NotNull
     @SuppressWarnings("unchecked")
-    public static <T> T getData(Plugin plugin, String key) {
+    public static <T> Optional<T> getData(Plugin plugin, String key) {
+        Optional<T> o = Optional.empty();
         if (hasData(plugin, key)) {
-            return (T) PLUGIN_VALUES.get(plugin.getName()).get(key);
+            o = Optional.of((T) PLUGIN_VALUES.get(plugin.getName()).get(key));
         }
-        return null;
+        return o;
     }
 
-    public static <T> T getData(Plugin plugin, String key, Class<T> returnType) {
+    @NotNull
+    public static <T> Optional<T> getData(Plugin plugin, String key, Class<T> returnType) {
         return getData(plugin, key);
         //
     }
