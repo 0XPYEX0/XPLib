@@ -19,6 +19,18 @@ public class Pair<K, V> {
         //
     }
 
+    //泛型拿到的Pair无法指定内部类型，可用此方法
+    @SuppressWarnings("unchecked")
+    public <T> T getKey(Class<T> returnType) {
+        return (T) key;
+    }
+
+    //泛型拿到的Pair无法指定内部类型，可用此方法
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(Class<T> returnType) {
+        return (T) value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
