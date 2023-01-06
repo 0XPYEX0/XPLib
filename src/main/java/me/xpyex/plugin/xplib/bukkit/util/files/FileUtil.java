@@ -26,7 +26,7 @@ public class FileUtil {
                 }
                 parent = parent.getParentFile();  //寻找所在目录
                 try {
-                    parent.mkdirs();  //尝试创建所在目录
+                    parent.mkdirs();  //尝试创建所在目录及其所有父目录
                     ex = null;  //打破第二个while
                 } catch (Throwable e) {
                     ex = e;  //重启第二个while
