@@ -3,3 +3,5 @@ version: '${version}'
 main: me.xpyex.plugin.xplib.bukkit.XPLib
 api-version: 1.13
 authors: [ XPYEX ]
+commands:
+  XPLib:

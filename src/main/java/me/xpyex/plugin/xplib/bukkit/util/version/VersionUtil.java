@@ -5,7 +5,7 @@ import me.xpyex.plugin.xplib.bukkit.api.Version;
 import org.bukkit.Bukkit;
 
 public class VersionUtil {
-    private static final int MAIN_VERSION = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1]);
+    private static final int MAIN_VERSION = new Version(Bukkit.getBukkitVersion()).getVersion(1);
     public static final Version VERSION = new Version(XPLib.getInstance().getDescription().getVersion());
 
     public static int getMainVersion() {
@@ -19,7 +19,7 @@ public class VersionUtil {
     }
 
     public static boolean requireXPLib(Version version) {
-        return version.equals(VERSION);
+        return version.compareTo(VERSION) <= 0;
         //
     }
 

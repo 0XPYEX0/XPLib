@@ -28,7 +28,11 @@ public class Version {
         String[] vers = mainVer.split("\\.");
         versions = new int[vers.length];
         for (int i = 0; i < vers.length; i++) {
-            versions[i] = Integer.parseInt(vers[i]);
+            try {
+                versions[i] = Integer.parseInt(vers[i]);
+            } catch (NumberFormatException ignored) {
+                versions[i] = 0;
+            }
         }
     }
 
@@ -66,7 +70,7 @@ public class Version {
 
         for (int i = 0; i < versions.length; i++) {
             if (version.versions[i] > this.versions[i]) {
-                return 1;
+                return -1;  //this较旧
             }
             if (version.versions[i] == this.versions[i]) {
                 if (i != versions.length - 1) {  //还没检查完的情况
@@ -86,7 +90,7 @@ public class Version {
                 }
             }
             if (version.versions[i] < this.versions[i]) {
-                return -1;
+                return 1;  //this较新
             }
         }
 
@@ -95,6 +99,11 @@ public class Version {
 
     public String getVersion() {
         return ver;
+        //
+    }
+
+    public int getVersion(int index) {
+        return versions[index];
         //
     }
 

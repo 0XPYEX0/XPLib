@@ -16,6 +16,7 @@ public final class XPLib extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
+        getLogger().info("当前服务端核心版本: " + getServer().getBukkitVersion());
         saveResource("zh_cn.json", false);
         getServer().getPluginManager().registerEvents(new HandleMenu(), getInstance());
         getServer().getPluginManager().registerEvents(new Listener() {
