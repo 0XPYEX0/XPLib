@@ -42,13 +42,7 @@ public class Version {
             return true;
         }
         if (o instanceof Version) {
-            Version v = (Version) o;
-            for (int i = 0; i < versions.length; i++) {
-                if (v.versions[i] != this.versions[i]) {
-                    return false;
-                }
-            }  //主版本是否一致
-            return v.betaInfo.equals(this.betaInfo);  //Beta版本是否一致
+            return this.compareTo((Version) o) == 0;
         }
         return false;
     }
@@ -60,6 +54,8 @@ public class Version {
      */
     public int compareTo(Version version) {
         if (version == null) return -1;
+
+        if (this == version) return 0;
 
         if (version.versions.length > this.versions.length) {
             return -1;
