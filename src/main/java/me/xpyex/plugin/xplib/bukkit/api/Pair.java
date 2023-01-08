@@ -5,6 +5,9 @@ public class Pair<K, V> {
     private final V value;
 
     public Pair(K key, V value) {
+        if (key == null) throw new IllegalArgumentException("Pair key is null");
+        if (value == null) throw new IllegalArgumentException("Pair value is null");
+
         this.key = key;
         this.value = value;
     }
@@ -20,15 +23,15 @@ public class Pair<K, V> {
     }
 
     //泛型拿到的Pair无法指定内部类型，可用此方法
-    @SuppressWarnings("unchecked")
-    public <T> T getKey(Class<T> returnType) {
-        return (T) key;
+    public K getKey(Class<K> returnType) {
+        return key;
+        //
     }
 
     //泛型拿到的Pair无法指定内部类型，可用此方法
-    @SuppressWarnings("unchecked")
-    public <T> T getValue(Class<T> returnType) {
-        return (T) value;
+    public  V getValue(Class<V> returnType) {
+        return value;
+        //
     }
 
     @Override

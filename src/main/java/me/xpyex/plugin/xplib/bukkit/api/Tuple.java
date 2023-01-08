@@ -13,4 +13,9 @@ public class Tuple {
         return (T) content[i];
         //
     }
+
+    public <T> T get(int i, Class<T> type) {
+        return get(i);
+        //
+    }
 }
