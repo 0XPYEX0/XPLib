@@ -10,18 +10,43 @@ import org.bukkit.command.CommandSender;
  */
 public class CommandMenu {
     private final String command;
-    private final String cmdColor;
-    private final String helpColor;
+    private final char cmdColor;
+    private final char helpColor;
+    private final String start;
+    private String hook = null;
+    private final String end;
     private final ArrayList<Pair<String, String>> helpList = new ArrayList<>();
 
     /**
      * 构造函数
      * @param command 帮助的主命令
      */
-    public CommandMenu(String command, String cmdColor, String helpColor) {
+    public CommandMenu(String command) {
+        this(command, 'f', 'f', "", "", "");
+        //
+    }
+
+    public CommandMenu(String command, char cmdColor, char helpColor) {
+        this(command, cmdColor, helpColor, "", "", "");
+        //
+    }
+
+    /**
+     * 构造函数
+     * @param command 帮助菜单的主命令
+     * @param cmdColor 命令部分以哪个字符染色
+     * @param helpColor 帮助部分由哪个字符染色
+     * @param start 消息开头使用的格式
+     * @param hook 消息中间使用的格式
+     * @param end 消息结尾使用的格式
+     */
+    public CommandMenu(String command, char cmdColor, char helpColor, String start, String hook, String end) {
         this.command = command;
         this.cmdColor = cmdColor;
         this.helpColor = helpColor;
+        this.start = start;
+        this.hook = hook;
+        this.end = end;
     }
 
     /**
@@ -44,9 +69,12 @@ public class CommandMenu {
      */
     @Override
     public String toString() {
+        if (hook == null || hook.isEmpty()) {
+            hook = "&f-";
+        }
         CommandMessager messager = new CommandMessager();
         for (Pair<String, String> pair : helpList) {
-            messager.plus(MsgUtil.getColorMsg("&" + cmdColor + "/" + command + " " + pair.getKey() + " &f- &" + helpColor + pair.getValue()));
+            messager.plus(MsgUtil.getColorMsg(start + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + hook + " &" + helpColor + pair.getValue() + end));
         }
         return messager.toString();
     }

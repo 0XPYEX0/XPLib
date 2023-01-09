@@ -2,31 +2,46 @@ package me.xpyex.plugin.xplib.bukkit.util.value;
 
 import java.util.HashMap;
 import java.util.Optional;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 public class ValueCacheUtil {
     private static final HashMap<String, HashMap<String, Object>> PLUGIN_VALUES = new HashMap<>();
 
-    public static void addData(Plugin plugin, String key, Object value) {
-        if (!PLUGIN_VALUES.containsKey(plugin.getName())) {
-            PLUGIN_VALUES.put(plugin.getName(), new HashMap<>());
-        }
+    public static void setData(Plugin plugin, String key, Object value) {
+        if (Util.isEmpty(plugin, key, value)) return;
+
+        PLUGIN_VALUES.computeIfAbsent(plugin.getName(), map -> new HashMap<>());
         PLUGIN_VALUES.get(plugin.getName()).put(key, value);
     }
 
+    public static void setData(String key, MetadataValue value) {
+        Plugin plugin = value.getOwningPlugin();
+        if (plugin == null) {
+            throw new IllegalArgumentException("This MetadataValue does not contain a plugin!");
+        }
+        setData(plugin, key, value.value());
+    }
+
     public static void delData(Plugin plugin, String key) {
+        if (Util.isEmpty(plugin, key)) return;
+
         if (PLUGIN_VALUES.containsKey(plugin.getName())) {
             PLUGIN_VALUES.get(plugin.getName()).remove(key);
         }
     }
 
     public static void delData(Plugin plugin) {
+        if (plugin == null) return;
+
         PLUGIN_VALUES.remove(plugin.getName());
-        //
     }
 
     public static void delList(Plugin plugin, String key) {
+        if (Util.isEmpty(plugin, key)) return;
+
         if (PLUGIN_VALUES.containsKey(plugin.getName())) {
             for (String k : PLUGIN_VALUES.get(plugin.getName()).keySet()) {
                 if (k.startsWith(key)) {
@@ -37,8 +52,9 @@ public class ValueCacheUtil {
     }
 
     public static boolean hasData(Plugin plugin, String key) {
+        if (Util.isEmpty(plugin, key)) return false;
+
         return PLUGIN_VALUES.containsKey(plugin.getName()) && PLUGIN_VALUES.get(plugin.getName()).containsKey(key);
-        //
     }
 
     @NotNull

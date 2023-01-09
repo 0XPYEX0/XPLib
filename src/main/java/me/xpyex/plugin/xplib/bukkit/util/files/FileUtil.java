@@ -1,11 +1,8 @@
 package me.xpyex.plugin.xplib.bukkit.util.files;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.util.Scanner;
 
 public class FileUtil {
     public static void createNewFile(File target, boolean replaced) throws Exception {
@@ -43,18 +40,12 @@ public class FileUtil {
      * @throws Exception 文件异常
      */
     public static String readFile(File target) throws Exception {
-        StringBuilder text = new StringBuilder();
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-            Files.newInputStream(target.toPath()), StandardCharsets.UTF_8));
-        String line;
-        while ((line = in.readLine()) != null) {
-            if (line.contains("//")) {
-                line = line.split("//")[0];  //不读取注释
-            }
-            text.append(line);
+        Scanner in = new Scanner(target, "UTF-8");
+        StringBuilder builder = new StringBuilder();
+        while (in.hasNextLine()) {
+            builder.append(in.nextLine()).append("\n");
         }
-        in.close();
-        return text.toString();
+        return builder.toString();
     }
 
     /**
