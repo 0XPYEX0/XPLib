@@ -2,6 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.util;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Util {
@@ -34,13 +35,16 @@ public class Util {
             if (o instanceof String) {
                 if (((String) o).isEmpty()) return true;
             }
-            if (o instanceof Collection<?>) {
+            if (o instanceof Map) {
+                if (((Map<?, ?>) o).isEmpty()) return true;
+            }
+            if (o instanceof Collection) {
                 if (((Collection<?>) o).isEmpty()) return true;
             }
-            if (o instanceof Iterable<?>) {
+            if (o instanceof Iterable) {
                 if (!((Iterable<?>) o).iterator().hasNext()) return true;
             }
-            if (o instanceof Iterator<?>) {
+            if (o instanceof Iterator) {
                 if (!((Iterator<?>) o).hasNext()) return true;
             }
         }
