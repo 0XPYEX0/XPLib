@@ -24,7 +24,7 @@ public class Util {
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     public static boolean isEmpty(Object... objects) {
@@ -48,6 +48,6 @@ public class Util {
                 if (!((Iterator<?>) o).hasNext()) return true;
             }
         }
-        return false;
+        return true;
     }
 }
