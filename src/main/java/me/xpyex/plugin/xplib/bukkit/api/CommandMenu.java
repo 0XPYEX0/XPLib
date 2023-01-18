@@ -1,6 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
 import java.util.ArrayList;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import org.bukkit.command.CommandSender;
 
@@ -12,9 +13,9 @@ public class CommandMenu {
     private final String command;
     private final char cmdColor;
     private final char helpColor;
-    private final String start;
+    private String start = null;
     private String hook = null;
-    private final String end;
+    private String end = null;
     private final ArrayList<Pair<String, String>> helpList = new ArrayList<>();
 
     /**
@@ -22,12 +23,12 @@ public class CommandMenu {
      * @param command 帮助的主命令
      */
     public CommandMenu(String command) {
-        this(command, 'f', 'f', "", "", "");
+        this(command, 'f', 'f');
         //
     }
 
     public CommandMenu(String command, char cmdColor, char helpColor) {
-        this(command, cmdColor, helpColor, "", "", "");
+        this(command, cmdColor, helpColor, null, null, null);
         //
     }
 
@@ -69,12 +70,12 @@ public class CommandMenu {
      */
     @Override
     public String toString() {
-        if (hook == null || hook.isEmpty()) {
+        if (Util.isEmpty(hook)) {
             hook = "&f-";
         }
         CommandMessager messager = new CommandMessager();
         for (Pair<String, String> pair : helpList) {
-            messager.plus(MsgUtil.getColorMsg(start + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + hook + " &" + helpColor + pair.getValue() + end));
+            messager.plus(MsgUtil.getColorMsg(Util.getOrDefault(start, "") + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + Util.getOrDefault(hook, "&f-") + " &" + helpColor + pair.getValue() + Util.getOrDefault(hook, "")));
         }
         return messager.toString();
     }
