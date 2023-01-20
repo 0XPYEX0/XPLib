@@ -75,7 +75,7 @@ public class Menu {
     public void updateInventory() {
         buttons.forEach((pair, button) -> {
             if (pair.getKey() == getOpeningPage()) {
-                pages.get(getOpeningPage()).setItem(pair.getValue(), button.getButton());
+                pages.get(getOpeningPage()).setItem(pair.getValue(), button.getStack());
             }
         });
     }

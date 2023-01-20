@@ -80,6 +80,10 @@ public class CommandMenu {
         return messager.toString();
     }
 
+    /**
+     * 直接发送该实例
+     * @param target 接收者
+     */
     public void send(CommandSender target) {
         target.sendMessage(this.toString());
         //

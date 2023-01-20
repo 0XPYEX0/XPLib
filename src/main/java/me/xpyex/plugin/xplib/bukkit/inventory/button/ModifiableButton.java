@@ -3,6 +3,9 @@ package me.xpyex.plugin.xplib.bukkit.inventory.button;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * 可被修改的按钮格
+ */
 public class ModifiableButton extends Button {
     private ButtonReturnItem returnItemEffect;
 

@@ -14,7 +14,7 @@ public class Tuple {
         //
     }
 
-    public <T> T get(int i, Class<T> type) {
+    public <T> T get(int i, @SuppressWarnings("unused") Class<T> type) {
         return get(i);
         //
     }

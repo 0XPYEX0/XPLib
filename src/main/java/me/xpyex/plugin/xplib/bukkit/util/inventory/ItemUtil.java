@@ -1,6 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.util.inventory;
 
 import java.util.ArrayList;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 import org.bukkit.Material;
@@ -9,6 +10,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtil {
+    /**
+     * 获取新的ItemStack
+     * @param stack 可复制ItemStack
+     * @param name 修改显示名称
+     * @param lore 修改Lore
+     * @return 全新的ItemStack
+     */
     public static ItemStack getItemStack(ItemStack stack, String name, String... lore) {
         ItemStack out = new ItemStack(stack);
         ItemMeta meta = out.getItemMeta();
@@ -22,12 +30,28 @@ public class ItemUtil {
         return out;
     }
 
+    /**
+     * 获取新的ItemStack
+     * @param material 新的ItemStack的类型
+     * @param name 修改显示名称
+     * @param lore 修改Lore
+     * @return 全新的ItemStack
+     */
     public static ItemStack getItemStack(Material material, String name, String... lore) {
         return getItemStack(new ItemStack(material), name, lore);
         //
     }
 
+    /**
+     * 检查两个ItemStack是否完全相等
+     * @param i1 第一个ItemStack
+     * @param i2 第二个ItemStack
+     * @return 是否相等
+     */
     public static boolean equals(ItemStack i1, ItemStack i2) {
+        if (Util.isNull(i1, i2)) {
+            return false;
+        }
         ItemStack copied1 = new ItemStack(i1);
         ItemStack copied2 = new ItemStack(i2);
         copied1.setAmount(1);
@@ -35,8 +59,14 @@ public class ItemUtil {
         return copied1.toString().equals(copied2.toString());
     }
 
+    /**
+     * 检查target是否为某种类型之一
+     * @param target 目标类型
+     * @param materials 待检查的类型
+     * @return target是materials之一
+     */
     public static boolean typeIsOr(Material target, Material... materials) {
-        if (target == null || materials == null || materials.length == 0) {
+        if (Util.isEmpty(target, materials)) {
             return false;
         }
 
@@ -48,25 +78,55 @@ public class ItemUtil {
         return false;
     }
 
+    /**
+     * 检查target是否为某种类型之一
+     * @param target 目标类型
+     * @param materials 待检查的类型
+     * @return target是materials之一
+     */
     public static boolean typeIsOr(Material target, String... materials) {
         return StrUtil.equalsIgnoreCaseOr(target.toString(), materials);
         //
     }
 
+    /**
+     * 检查ItemStack的类型是否为某种类型之一
+     * @param stack 目标ItemStack
+     * @param materials 待检查的类型
+     * @return stack的类型是materials之一
+     */
     public static boolean typeIsOr(ItemStack stack, String... materials) {
         return typeIsOr(stack.getType(), materials);
         //
     }
 
+    /**
+     * 检查ItemStack的类型是否为某种类型之一
+     * @param stack 目标ItemStack
+     * @param materials 待检查的类型
+     * @return stack的类型是materials之一
+     */
     public static boolean typeIsOr(ItemStack stack, Material... materials) {
         return typeIsOr(stack.getType(), materials);
     }
 
+    /**
+     * 检查Block的类型是否为某种类型之一
+     * @param block 目标ItemStack
+     * @param materials 待检查的类型
+     * @return block的类型是materials之一
+     */
     public static boolean typeIsOr(Block block, Material... materials) {
         return typeIsOr(block.getType(), materials);
         //
     }
 
+    /**
+     * 检查Block的类型是否为某种类型之一
+     * @param block 目标ItemStack
+     * @param materials 待检查的类型
+     * @return block的类型是materials之一
+     */
     public static boolean typeIsOr(Block block, String... materials) {
         return typeIsOr(block.getType(), materials);
         //

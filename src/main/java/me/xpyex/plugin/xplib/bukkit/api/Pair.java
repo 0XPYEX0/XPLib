@@ -23,13 +23,13 @@ public class Pair<K, V> {
     }
 
     //泛型拿到的Pair无法指定内部类型，可用此方法
-    public K getKey(Class<K> returnType) {
+    public K getKey(@SuppressWarnings("unused") Class<K> returnType) {
         return key;
         //
     }
 
     //泛型拿到的Pair无法指定内部类型，可用此方法
-    public  V getValue(Class<V> returnType) {
+    public  V getValue(@SuppressWarnings("unused") Class<V> returnType) {
         return value;
         //
     }

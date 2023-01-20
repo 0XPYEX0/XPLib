@@ -38,7 +38,7 @@ public class InvSetter {
 
     public InvSetter setSign(String sign, Button button) {
         buttonMap.put(sign, button);
-        return setSign(sign, button.getButton());
+        return setSign(sign, button.getStack());
     }
 
     public Inventory getInv() {

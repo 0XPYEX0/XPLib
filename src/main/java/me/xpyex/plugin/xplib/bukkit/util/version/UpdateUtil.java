@@ -9,8 +9,15 @@ import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.bukkit.api.Version;
 import me.xpyex.plugin.xplib.bukkit.util.config.GsonUtil;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 public class UpdateUtil {
+    /**
+     * 从Gitee仓库获取更新资源
+     * @param plugin 插件实例
+     * @return 是否有更新. 没有更新，或失败则返回null；有更新则返回对应版本号
+     */
+    @Nullable
     public static String getUpdateFromGitee(Plugin plugin) {
         try {
             HttpURLConnection huc = (HttpURLConnection) new URL("https://gitee.com/api/v5/repos/xpyex/" + plugin.getName() + "/tags").openConnection();
