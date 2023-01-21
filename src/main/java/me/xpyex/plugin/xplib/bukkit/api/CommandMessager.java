@@ -11,7 +11,8 @@ import org.bukkit.command.CommandSender;
 public class CommandMessager {
     private final ArrayList<String> messages = new ArrayList<>();
 
-    public CommandMessager() {}
+    public CommandMessager() {
+    }
 
     public CommandMessager(String message) {
         messages.add(message);
@@ -20,6 +21,7 @@ public class CommandMessager {
 
     /**
      * 新增一行
+     *
      * @param message 参数
      * @return 返回自身，制造链式
      */
@@ -30,6 +32,7 @@ public class CommandMessager {
 
     /**
      * 获取最终结果
+     *
      * @return 字符串结果
      */
     @Override
@@ -43,6 +46,7 @@ public class CommandMessager {
 
     /**
      * 直接发送给目标
+     *
      * @param target 接收信息的目标
      */
     public void send(CommandSender target) {

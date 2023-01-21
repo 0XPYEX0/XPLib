@@ -12,9 +12,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemUtil {
     /**
      * 获取新的ItemStack
+     *
      * @param stack 可复制ItemStack
-     * @param name 修改显示名称
-     * @param lore 修改Lore
+     * @param name  修改显示名称
+     * @param lore  修改Lore
      * @return 全新的ItemStack
      */
     public static ItemStack getItemStack(ItemStack stack, String name, String... lore) {
@@ -32,9 +33,10 @@ public class ItemUtil {
 
     /**
      * 获取新的ItemStack
+     *
      * @param material 新的ItemStack的类型
-     * @param name 修改显示名称
-     * @param lore 修改Lore
+     * @param name     修改显示名称
+     * @param lore     修改Lore
      * @return 全新的ItemStack
      */
     public static ItemStack getItemStack(Material material, String name, String... lore) {
@@ -44,6 +46,7 @@ public class ItemUtil {
 
     /**
      * 检查两个ItemStack是否完全相等
+     *
      * @param i1 第一个ItemStack
      * @param i2 第二个ItemStack
      * @return 是否相等
@@ -61,7 +64,8 @@ public class ItemUtil {
 
     /**
      * 检查target是否为某种类型之一
-     * @param target 目标类型
+     *
+     * @param target    目标类型
      * @param materials 待检查的类型
      * @return target是materials之一
      */
@@ -80,7 +84,8 @@ public class ItemUtil {
 
     /**
      * 检查target是否为某种类型之一
-     * @param target 目标类型
+     *
+     * @param target    目标类型
      * @param materials 待检查的类型
      * @return target是materials之一
      */
@@ -91,7 +96,8 @@ public class ItemUtil {
 
     /**
      * 检查ItemStack的类型是否为某种类型之一
-     * @param stack 目标ItemStack
+     *
+     * @param stack     目标ItemStack
      * @param materials 待检查的类型
      * @return stack的类型是materials之一
      */
@@ -102,7 +108,8 @@ public class ItemUtil {
 
     /**
      * 检查ItemStack的类型是否为某种类型之一
-     * @param stack 目标ItemStack
+     *
+     * @param stack     目标ItemStack
      * @param materials 待检查的类型
      * @return stack的类型是materials之一
      */
@@ -112,7 +119,8 @@ public class ItemUtil {
 
     /**
      * 检查Block的类型是否为某种类型之一
-     * @param block 目标ItemStack
+     *
+     * @param block     目标ItemStack
      * @param materials 待检查的类型
      * @return block的类型是materials之一
      */
@@ -123,7 +131,8 @@ public class ItemUtil {
 
     /**
      * 检查Block的类型是否为某种类型之一
-     * @param block 目标ItemStack
+     *
+     * @param block     目标ItemStack
      * @param materials 待检查的类型
      * @return block的类型是materials之一
      */

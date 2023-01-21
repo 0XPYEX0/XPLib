@@ -13,6 +13,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class XPLib extends JavaPlugin {
     private static XPLib INSTANCE;
 
+    public static XPLib getInstance() {
+        return INSTANCE;
+        //
+    }
+
+    @Override
+    public void onDisable() {
+        for (Menu menu : Menu.getMenus().values()) {
+            menu.getPlayer().closeInventory();
+        }
+        getLogger().info("已卸载");
+    }
+
     @Override
     public void onEnable() {
         INSTANCE = this;
@@ -45,18 +58,5 @@ public final class XPLib extends JavaPlugin {
             getLogger().info("与bStats挂钩");
         });
         getLogger().info("已加载");
-    }
-
-    @Override
-    public void onDisable() {
-        for (Menu menu : Menu.getMenus().values()) {
-            menu.getPlayer().closeInventory();
-        }
-        getLogger().info("已卸载");
-    }
-
-    public static XPLib getInstance() {
-        return INSTANCE;
-        //
     }
 }

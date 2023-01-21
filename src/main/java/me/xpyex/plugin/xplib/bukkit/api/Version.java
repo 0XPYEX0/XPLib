@@ -47,8 +47,15 @@ public class Version {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return ver;
+        //
+    }
+
     /**
      * 比较两个Version
+     *
      * @param version 目标Version
      * @return 返回0相等，返回1表示this较新于version，返回-1表示this较旧于version
      */
@@ -100,12 +107,6 @@ public class Version {
 
     public int getVersion(int index) {
         return versions[index];
-        //
-    }
-
-    @Override
-    public String toString() {
-        return ver;
         //
     }
 }

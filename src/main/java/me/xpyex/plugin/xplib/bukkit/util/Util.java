@@ -1,7 +1,6 @@
 package me.xpyex.plugin.xplib.bukkit.util;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 public class Util {
     /**
      * 安全获取值，类似Optional
-     * @param value 需要判定的值.
+     *
+     * @param value     需要判定的值.
      * @param defaulted 若value为null，则返回此实例
      * @return 返回安全的值
      */
@@ -25,9 +25,10 @@ public class Util {
 
     /**
      * 安全获取值，类似Optional
-     * @param callable 执行返回值的方法.
+     *
+     * @param callable  执行返回值的方法.
      * @param defaulted 如callable的返回值为null，或过程中出现错误，则返回此
-     * @param errMsg 描述错误的信息
+     * @param errMsg    描述错误的信息
      * @return 返回安全的值，不会出现空指针
      */
     @NotNull
@@ -45,7 +46,8 @@ public class Util {
 
     /**
      * 安全获取值，类似Optional
-     * @param callable 执行返回值的方法.
+     *
+     * @param callable  执行返回值的方法.
      * @param defaulted 如callable的返回值为null，或过程中出现错误，则返回此
      * @return 返回安全的值，不会出现空指针
      */
@@ -57,6 +59,7 @@ public class Util {
 
     /**
      * 检查Callable的返回值是否存在null，是安全的方法
+     *
      * @param callables 某些会返回实例的方法体
      * @return 其中是否出现null
      */
@@ -78,6 +81,7 @@ public class Util {
 
     /**
      * 检查Callable的返回值是否存在空，是安全的方法
+     *
      * @param callables 某些会返回实例的方法体
      * @return 其中是否出现空
      */
@@ -99,6 +103,7 @@ public class Util {
 
     /**
      * 检查传入的值是否存在null
+     *
      * @param objects 要检查的实例
      * @return 是否存在null
      */
@@ -115,7 +120,19 @@ public class Util {
     }
 
     /**
+     * 检查传入的值是否存在null
+     *
+     * @param msg     若存在null，抛出IllegalArgumentException，此为描述信息
+     * @param objects 要检查的实例
+     */
+    public static void checkNull(String msg, Object... objects) {
+        if (isNull(objects))
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
      * 检查传入的值是否存在空
+     *
      * @param objects 要检查的实例
      * @return 是否存在空
      */
@@ -132,7 +149,8 @@ public class Util {
             }
             try {
                 if (Array.getLength(o) == 0) return true;  //如果是Object[]，且没有内容
-            } catch (IllegalArgumentException ignored) { }
+            } catch (IllegalArgumentException ignored) {
+            }
             if (o instanceof Map) {
                 if (((Map<?, ?>) o).isEmpty()) return true;
             }

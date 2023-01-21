@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 public class BlockUtil {
     /**
      * 覆盖从loc1到loc2内的所有方块，且线程安全 (不异步执行)
+     *
      * @param loc1 第一个坐标
      * @param loc2 第二个坐标
      * @param type 将被替换的方块类型
@@ -30,6 +31,7 @@ public class BlockUtil {
 
     /**
      * 覆盖从loc1到loc2内的所有方块，且线程安全 (不异步执行)
+     *
      * @param loc1 第一个坐标
      * @param loc2 第二个坐标
      * @param data 将被写入的BlockData (仅1.13+)
@@ -47,6 +49,7 @@ public class BlockUtil {
 
     /**
      * 替换从loc1到loc2内的所有方块，且线程安全 (不异步执行)
+     *
      * @param loc1 第一个坐标
      * @param loc2 第二个坐标
      * @param what 会被替换掉的方块类型
@@ -67,6 +70,7 @@ public class BlockUtil {
 
     /**
      * 替换从loc1到loc2内的所有方块，且线程安全 (不异步执行)
+     *
      * @param loc1 第一个坐标
      * @param loc2 第二个坐标
      * @param what 会被替换掉的方块类型
@@ -84,6 +88,7 @@ public class BlockUtil {
 
     /**
      * 获取从loc1到loc2内的所有方块
+     *
      * @param loc1 第一个坐标
      * @param loc2 第二个坐标
      * @return 两坐标内的所有方块
@@ -118,6 +123,7 @@ public class BlockUtil {
 
     /**
      * 获取玩家看向的方块
+     *
      * @param player 目标玩家
      * @return player看向的方块
      */

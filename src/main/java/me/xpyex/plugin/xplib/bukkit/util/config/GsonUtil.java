@@ -14,6 +14,7 @@ public class GsonUtil {
 
     /**
      * 将JSON文本转化为JsonObject
+     *
      * @param jsonText JSON文本
      * @return 对应的JsonObject
      */
@@ -24,6 +25,7 @@ public class GsonUtil {
 
     /**
      * 将JSON文本转化为JsonArray
+     *
      * @param jsonText JSON文本
      * @return 对应的JsonArray
      */
@@ -34,8 +36,9 @@ public class GsonUtil {
 
     /**
      * 将JSON文本转化为有规律的某个类
+     *
      * @param jsonText JSON文本
-     * @param type 要返回的类
+     * @param type     要返回的类
      * @return 返回自定义类
      */
     public static <T> T parseJson(String jsonText, Class<T> type) {
@@ -45,6 +48,7 @@ public class GsonUtil {
 
     /**
      * 将实例转化为JSON文本
+     *
      * @param json 实例
      * @return JSON文本
      */
@@ -55,6 +59,7 @@ public class GsonUtil {
 
     /**
      * 安全复制JsonObject
+     *
      * @param o1 要被复制的JsonObject
      * @return 被复制的JsonObject
      */

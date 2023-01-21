@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class UpdateUtil {
     /**
      * 从Gitee仓库获取更新资源
+     *
      * @param plugin 插件实例
      * @return 是否有更新. 没有更新，或失败则返回null；有更新则返回对应版本号
      */

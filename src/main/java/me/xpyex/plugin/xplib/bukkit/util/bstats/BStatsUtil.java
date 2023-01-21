@@ -7,8 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class BStatsUtil {
     /**
      * 插件与bStats挂钩
+     *
      * @param plugin 插件实例
-     * @param id bStats ID
+     * @param id     bStats ID
      * @return bStats统计实例
      */
     public static Metrics hookWith(JavaPlugin plugin, int id) {
@@ -18,6 +19,7 @@ public class BStatsUtil {
 
     /**
      * XPLib与bStats挂钩
+     *
      * @return bStats统计实例
      */
     public static Metrics hookWith() {

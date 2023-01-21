@@ -7,12 +7,21 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * 快速创建Inventory的工具类
+ */
 public class InvSetter {
     private final HashMap<String, ItemStack> signMap = new HashMap<>();
     private final HashMap<String, Button> buttonMap = new HashMap<>();
     private final String[] pattern;
     private final Inventory inv;
 
+    /**
+     * 构造函数
+     *
+     * @param title   生成的Inventory的标题
+     * @param pattern Inventory的内容规范
+     */
     public InvSetter(String title, String... pattern) {
         if (pattern.length > 6) {
             throw new IllegalArgumentException("超出GUI最大限度");
@@ -26,21 +35,47 @@ public class InvSetter {
         inv = Bukkit.createInventory(null, pattern.length * 9, title);
     }
 
+    /**
+     * 设定构造函数pattern中，某项符号所代表的ItemStack
+     *
+     * @param sign 符号
+     * @param item 符号所代表的ItemStack
+     * @return 返回自身，创建链式代码
+     */
     public InvSetter setSign(String sign, ItemStack item) {
         signMap.put(sign, item);
         return this;
     }
 
+    /**
+     * 设定构造函数pattern中，某项符号所代表的ItemStack
+     *
+     * @param sign     符号
+     * @param material 符号所代表的ItemStack (用Material构造ItemStack)
+     * @return 返回自身，创建链式代码
+     */
     public InvSetter setSign(String sign, Material material) {
         return setSign(sign, new ItemStack(material));
         //
     }
 
+    /**
+     * 设定构造函数pattern中，某项符号所代表的Button
+     *
+     * @param sign   符号
+     * @param button 符号所代表的Button
+     * @return 返回自身，创建链式代码
+     */
     public InvSetter setSign(String sign, Button button) {
         buttonMap.put(sign, button);
         return setSign(sign, button.getStack());
     }
 
+    /**
+     * 以此InvSetter构造Inventory
+     *
+     * @return 构造后的Inventory
+     */
     public Inventory getInv() {
         int slot;
         for (int i = 0; i < pattern.length; i++) {

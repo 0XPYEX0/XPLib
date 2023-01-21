@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public class NameUtil {
     private static final JsonElement EMPTY_STR = new JsonPrimitive("");
     private static JsonObject ZH_CN;
+
     static {
         try {
             File f = new File(XPLib.getInstance().getDataFolder(), "zh_cn.json");
@@ -28,6 +29,7 @@ public class NameUtil {
 
     /**
      * 获取Material对应的简体中文译名
+     *
      * @param material 某个Material
      * @return material对应的中文译名
      */
@@ -36,13 +38,14 @@ public class NameUtil {
         return Util.getOrDefault(() -> {
             return ((material.isBlock()) ?
                         ZH_CN.get("block.minecraft." + material.toString().toLowerCase()) :
-             ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
+                        ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
             ).getAsString();
         }, material.toString().toLowerCase());
     }
 
     /**
      * 获取ItemStack的类型所对应的简体中文译名
+     *
      * @param i 某个ItemStack
      * @return 其类型所对应的简体中文译名
      */
@@ -53,6 +56,7 @@ public class NameUtil {
 
     /**
      * 获取Block的类型所对应的简体中文译名
+     *
      * @param b 某个Block
      * @return 其类型所对应的简体中文译名
      */
@@ -63,6 +67,7 @@ public class NameUtil {
 
     /**
      * 获取该EntityType对应的简体中文译名
+     *
      * @param type 实体类型
      * @return 对应的简体中文译名
      */
@@ -74,6 +79,7 @@ public class NameUtil {
 
     /**
      * 获取该Entity的类型所对应的简体中文译名
+     *
      * @param entity 实体
      * @return 其类型所对应的简体中文译名
      */

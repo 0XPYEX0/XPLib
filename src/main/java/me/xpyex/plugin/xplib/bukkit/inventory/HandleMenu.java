@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class HandleMenu implements Listener {
     @EventHandler
@@ -45,7 +46,11 @@ public class HandleMenu implements Listener {
         } else if (button instanceof ModifiableButton) {
             ButtonReturnItem returnItemEffect = ((ModifiableButton) button).getReturnItem();
             if (returnItemEffect != null) {
-                event.getClickedInventory().setItem(event.getSlot(), returnItemEffect.returnItem(whoClicked, event.getClick(), event.getCurrentItem()));
+                ItemStack item = returnItemEffect.returnItem(whoClicked, event.getClick(), event.getCurrentItem());
+                ((ModifiableButton) button).setStack(item);
+                event.getClickedInventory().setItem(event.getSlot(), item);
+            } else {
+                ((ModifiableButton) button).setStack(event.getCurrentItem());
             }
         }
         menu.updateInventory();  //实时更新

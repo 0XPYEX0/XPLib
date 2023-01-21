@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 public class MsgUtil {
     /**
      * 获取MC的彩色文本
+     *
      * @param msg 原文本
      * @return 彩色文本
      */
@@ -22,7 +23,8 @@ public class MsgUtil {
 
     /**
      * 向玩家发送ActionBar消息
-     * @param p 目标玩家
+     *
+     * @param p    目标玩家
      * @param text 消息
      */
     public static void sendActionBar(Player p, String text) {
@@ -35,8 +37,9 @@ public class MsgUtil {
 
     /**
      * 在后台输出Debug消息
+     *
      * @param plugin 哪个插件要求发送，需要在config.json内将debug项设为true
-     * @param info 消息
+     * @param info   消息
      */
     public static void debugLog(Plugin plugin, String info) {
         if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
@@ -45,8 +48,9 @@ public class MsgUtil {
 
     /**
      * 在后台输出Debug消息
+     *
      * @param plugin 哪个插件要求发送，需要在config.json内将debug项设为true
-     * @param e 出现的异常
+     * @param e      出现的异常
      */
     public static void debugLog(Plugin plugin, Throwable e) {
         if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
@@ -55,6 +59,7 @@ public class MsgUtil {
 
     /**
      * 向服务器广播，消息自动染色
+     *
      * @param msg 消息
      */
     public static void broadcast(String msg) {

@@ -13,13 +13,14 @@ public class CommandMenu {
     private final String command;
     private final char cmdColor;
     private final char helpColor;
+    private final ArrayList<Pair<String, String>> helpList = new ArrayList<>();
     private String start = null;
     private String hook = null;
     private String end = null;
-    private final ArrayList<Pair<String, String>> helpList = new ArrayList<>();
 
     /**
      * 构造函数
+     *
      * @param command 帮助的主命令
      */
     public CommandMenu(String command) {
@@ -34,12 +35,13 @@ public class CommandMenu {
 
     /**
      * 构造函数
-     * @param command 帮助菜单的主命令
-     * @param cmdColor 命令部分以哪个字符染色
+     *
+     * @param command   帮助菜单的主命令
+     * @param cmdColor  命令部分以哪个字符染色
      * @param helpColor 帮助部分由哪个字符染色
-     * @param start 消息开头使用的格式
-     * @param hook 消息中间使用的格式
-     * @param end 消息结尾使用的格式
+     * @param start     消息开头使用的格式
+     * @param hook      消息中间使用的格式
+     * @param end       消息结尾使用的格式
      */
     public CommandMenu(String command, char cmdColor, char helpColor, String start, String hook, String end) {
         this.command = command;
@@ -52,8 +54,9 @@ public class CommandMenu {
 
     /**
      * 添加一行帮助
+     *
      * @param argument 参数
-     * @param help 对应参数的帮助
+     * @param help     对应参数的帮助
      * @return 返回自身，制造链式调用
      */
     public CommandMenu add(String argument, String help) {
@@ -66,6 +69,7 @@ public class CommandMenu {
 
     /**
      * 拼接整个帮助菜单
+     *
      * @return 返回帮助菜单
      */
     @Override
@@ -82,6 +86,7 @@ public class CommandMenu {
 
     /**
      * 直接发送该实例
+     *
      * @param target 接收者
      */
     public void send(CommandSender target) {

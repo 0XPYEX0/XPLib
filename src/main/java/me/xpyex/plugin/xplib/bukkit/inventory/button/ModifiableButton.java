@@ -1,6 +1,9 @@
 package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -8,9 +11,16 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ModifiableButton extends Button {
     private ButtonReturnItem returnItemEffect;
+    private ItemStack stack = new ItemStack(Material.AIR);
 
     public ModifiableButton(Menu menu, ButtonCondition condition) {
         super(menu, condition);
+        //
+    }
+
+    @Nullable
+    public ButtonReturnItem getReturnItem() {
+        return returnItemEffect;
         //
     }
 
@@ -19,9 +29,14 @@ public class ModifiableButton extends Button {
         //
     }
 
-    @Nullable
-    public ButtonReturnItem getReturnItem() {
-        return returnItemEffect;
+    @Override
+    public ItemStack getStack() {
+        return stack;
         //
+    }
+
+    public void setStack(ItemStack stack) {
+        Util.checkNull("stack不应为null", stack);
+        this.stack = stack;
     }
 }
