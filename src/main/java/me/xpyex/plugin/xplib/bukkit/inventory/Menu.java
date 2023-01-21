@@ -58,6 +58,7 @@ public class Menu {
      *
      * @return MenuMap
      */
+    @NotNull
     public static HashMap<UUID, Menu> getMenus() {
         return MENUS;
         //
@@ -70,6 +71,7 @@ public class Menu {
      * @param setter 构造器
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public Menu setPage(int page, InvSetter setter) {
         this.setters.put(page, setter);
         return this;
@@ -101,6 +103,7 @@ public class Menu {
      * @param page  页数
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public Menu setSign(String sign, ItemStack stack, int page) {
         setters.get(page).setSign(sign, stack);
         return this;
@@ -114,6 +117,7 @@ public class Menu {
      * @param page   页数
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public Menu setSign(String sign, Button button, int page) {
         setters.get(page).setSign(sign, button);
         return this;
@@ -138,6 +142,7 @@ public class Menu {
      * @param button Button
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public Menu setButton(int page, int slot, Button button) {
         if (button != null) {
             buttons.put(new Pair<>(page, slot), button);
@@ -153,6 +158,7 @@ public class Menu {
      * @param button Button
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public Menu setButton(InvSetter setter, int slot, Button button) {
         if (setter != null && button != null) {
             for (Integer k : setters.keySet()) {
@@ -219,6 +225,7 @@ public class Menu {
      * @param slot 位置
      * @return Button
      */
+    @Nullable
     public Button getButton(int slot) {
         Pair<Integer, Integer> pair = new Pair<>(getOpeningPage(), slot);
         for (Pair<Integer, Integer> i : buttons.keySet()) {

@@ -1,6 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
 import java.util.TreeSet;
+import me.xpyex.plugin.xplib.bukkit.util.Util;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 
 public class Version {
@@ -9,6 +10,7 @@ public class Version {
     private final String ver;
 
     public Version(String ver) {
+        Util.checkNull("ver不应为空", ver);
         this.ver = ver;
         String mainVer;
         if (ver.contains("-")) {

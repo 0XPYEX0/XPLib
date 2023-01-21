@@ -3,6 +3,7 @@ package me.xpyex.plugin.xplib.bukkit.util.bstats;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.bukkit.bstats.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class BStatsUtil {
     /**
@@ -12,6 +13,7 @@ public class BStatsUtil {
      * @param id     bStats ID
      * @return bStats统计实例
      */
+    @NotNull
     public static Metrics hookWith(JavaPlugin plugin, int id) {
         return new Metrics(plugin, id);
         //
@@ -22,6 +24,7 @@ public class BStatsUtil {
      *
      * @return bStats统计实例
      */
+    @NotNull
     public static Metrics hookWith() {
         return hookWith(XPLib.getInstance(), 17099);
     }

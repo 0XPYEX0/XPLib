@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import me.xpyex.plugin.xplib.bukkit.util.Util;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 命令帮助菜单
@@ -59,6 +60,7 @@ public class CommandMenu {
      * @param help     对应参数的帮助
      * @return 返回自身，制造链式调用
      */
+    @NotNull
     public CommandMenu add(String argument, String help) {
         if (argument == null || help == null || argument.isEmpty()) {  //help可为空值，仅描述有子参数，但不提供教程
             return this;

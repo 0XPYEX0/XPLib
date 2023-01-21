@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 快速创建Inventory的工具类
@@ -42,6 +43,7 @@ public class InvSetter {
      * @param item 符号所代表的ItemStack
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public InvSetter setSign(String sign, ItemStack item) {
         signMap.put(sign, item);
         return this;
@@ -54,6 +56,7 @@ public class InvSetter {
      * @param material 符号所代表的ItemStack (用Material构造ItemStack)
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public InvSetter setSign(String sign, Material material) {
         return setSign(sign, new ItemStack(material));
         //
@@ -66,6 +69,7 @@ public class InvSetter {
      * @param button 符号所代表的Button
      * @return 返回自身，创建链式代码
      */
+    @NotNull
     public InvSetter setSign(String sign, Button button) {
         buttonMap.put(sign, button);
         return setSign(sign, button.getStack());

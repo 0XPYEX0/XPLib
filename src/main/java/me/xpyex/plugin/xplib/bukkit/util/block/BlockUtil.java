@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockUtil {
     /**
@@ -93,6 +94,7 @@ public class BlockUtil {
      * @param loc2 第二个坐标
      * @return 两坐标内的所有方块
      */
+    @NotNull
     public static List<Block> getBlocks(Location loc1, Location loc2) {
         if (Util.isNull(loc1, loc2) || !loc1.isWorldLoaded() || !loc2.isWorldLoaded()) {
             return Collections.emptyList();
@@ -127,6 +129,7 @@ public class BlockUtil {
      * @param player 目标玩家
      * @return player看向的方块
      */
+    @NotNull
     public static Block getTargetBlock(Player player) {
         return player.getTargetBlock(null, 10);
         //
