@@ -166,4 +166,15 @@ public class Util {
         }
         return false;
     }
+
+    /**
+     * 若条件为false，则抛出IllegalStateException
+     *
+     * @param result 条件
+     * @param errMsg 错误信息
+     */
+    public static void checkTrue(boolean result, String errMsg) {
+        if (!result)
+            throw new IllegalStateException(errMsg);
+    }
 }
