@@ -49,12 +49,24 @@ public class MsgUtil {
     /**
      * 在后台输出Debug消息
      *
-     * @param plugin 哪个插件要求发送，需要在config.json内将debug项设为true
-     * @param e      出现的异常
+     * @param plugin    哪个插件要求发送，需要在config.json内将debug项设为true
+     * @param throwable 出现的异常
      */
-    public static void debugLog(Plugin plugin, Throwable e) {
+    public static void debugLog(Plugin plugin, Throwable throwable) {
         if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
-            e.printStackTrace();
+            throwable.printStackTrace();
+    }
+
+    /**
+     * 在后台输出Debug消息
+     *
+     * @param plugin    哪个插件要求发送，需要在config.json内将debug项设为true
+     * @param errMsg    描述异常发生的原因
+     * @param throwable 出现的异常
+     */
+    public static void debugLog(Plugin plugin, String errMsg, Throwable throwable) {
+        if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
+            new Throwable(errMsg, throwable).printStackTrace();
     }
 
     /**

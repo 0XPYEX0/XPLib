@@ -38,7 +38,7 @@ public class BlockUtil {
      * @param data 将被写入的BlockData (仅1.13+)
      */
     public static void fillBlocks(Location loc1, Location loc2, BlockData data) {
-        Util.checkTrue(VersionUtil.getMainVersion() >= 13, "该方法仅在 MC版本 >= 1.13 时可用");
+        Util.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
         for (Block block : getBlocks(loc1, loc2)) {
             Bukkit.getScheduler().runTask(XPLib.getInstance(), () -> {
                 block.setBlockData(data);
@@ -55,7 +55,7 @@ public class BlockUtil {
      * @param data 将被写入的BlockData (仅1.13+)
      */
     public static void replaceBlocks(Location loc1, Location loc2, Material what, BlockData data) {
-        Util.checkTrue(VersionUtil.getMainVersion() >= 13, "该方法仅在 MC版本 >= 1.13 时可用");
+        Util.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
         for (Block block : getBlocks(loc1, loc2)) {
             if (block.getType() == what) {
                 Bukkit.getScheduler().runTask(XPLib.getInstance(), () -> {

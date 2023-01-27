@@ -25,6 +25,7 @@ dependencies {
 
 def targetJavaVersion = 8
 java {
+    withSourcesJar()
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion

@@ -35,12 +35,12 @@ public class NameUtil {
      */
     public static String getTranslationName(Material material) {
         if (material == null) return "";
-        return Util.getOrDefault(() -> {
-            return ((material.isBlock()) ?
-                        ZH_CN.get("block.minecraft." + material.toString().toLowerCase()) :
-                        ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
-            ).getAsString();
-        }, material.toString().toLowerCase());
+        return Util.getOrDefault((() ->
+                                      ((material.isBlock()) ?
+                                           ZH_CN.get("block.minecraft." + material.toString().toLowerCase()) :
+                                           ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
+                                      ).getAsString()
+        ), material.toString().toLowerCase());
     }
 
     /**
