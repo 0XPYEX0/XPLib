@@ -2,7 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +14,7 @@ public abstract class Button {
     private ButtonClickEffect clickEffect;
 
     public Button(Menu menu, ButtonCondition condition) {
-        Util.checkNull("menu或condition不应为null", menu, condition);
+        ValueUtil.checkNull("menu或condition不应为null", menu, condition);
         this.condition = condition;
         this.menu = menu;
         //

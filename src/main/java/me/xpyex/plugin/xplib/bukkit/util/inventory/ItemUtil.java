@@ -1,15 +1,16 @@
 package me.xpyex.plugin.xplib.bukkit.util.inventory;
 
 import java.util.ArrayList;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemUtil {
+public class ItemUtil extends RootUtil {
     /**
      * 获取新的ItemStack
      *
@@ -52,7 +53,7 @@ public class ItemUtil {
      * @return 是否相等
      */
     public static boolean equals(ItemStack i1, ItemStack i2) {
-        if (Util.isNull(i1, i2)) {
+        if (ValueUtil.isNull(i1, i2)) {
             return false;
         }
         ItemStack copied1 = new ItemStack(i1);
@@ -70,7 +71,7 @@ public class ItemUtil {
      * @return target是materials之一
      */
     public static boolean typeIsOr(Material target, Material... materials) {
-        if (Util.isEmpty(target, materials)) {
+        if (ValueUtil.isEmpty(target, materials)) {
             return false;
         }
 

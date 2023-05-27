@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import me.xpyex.plugin.xplib.bukkit.api.Pair;
 import me.xpyex.plugin.xplib.bukkit.inventory.button.Button;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -27,7 +27,7 @@ public class Menu {
      * @param player 该Menu会向谁打开
      */
     public Menu(Player player) {
-        Util.checkNull("Menu必须有一个持有者", player);
+        ValueUtil.checkNull("Menu必须有一个持有者", player);
         this.player = player;
     }
 

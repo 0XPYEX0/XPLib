@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 
-public class GsonUtil {
+public class GsonUtil extends RootUtil {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     /**
@@ -67,11 +69,17 @@ public class GsonUtil {
         try {
             return o1.deepCopy();
         } catch (IllegalAccessError ignored) {
-            JsonObject result = new JsonObject();
-            for (Map.Entry<String, JsonElement> entry : o1.entrySet()) {
-                result.add(entry.getKey(), entry.getValue());
+            try {
+                Method method = JsonObject.class.getMethod("deepCopy");
+                method.setAccessible(true);
+                return (JsonObject) method.invoke(o1);  //司马Gson，反射看你听不听话
+            } catch (ReflectiveOperationException ignored1) {
+                JsonObject result = new JsonObject();
+                for (Map.Entry<String, JsonElement> entry : o1.entrySet()) {
+                    result.add(entry.getKey(), entry.getValue());
+                }
+                return result;
             }
-            return result;
         }
     }
 

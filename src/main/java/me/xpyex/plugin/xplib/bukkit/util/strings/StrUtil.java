@@ -1,6 +1,8 @@
 package me.xpyex.plugin.xplib.bukkit.util.strings;
 
-public class StrUtil {
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
+
+public class StrUtil extends RootUtil {
     /**
      * 获取两个关键词中间的字符串
      *

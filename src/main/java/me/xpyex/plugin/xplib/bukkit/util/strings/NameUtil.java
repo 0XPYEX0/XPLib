@@ -5,16 +5,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import java.io.File;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.config.GsonUtil;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
-public class NameUtil {
+public class NameUtil extends RootUtil {
     private static final JsonElement EMPTY_STR = new JsonPrimitive("");
     private static JsonObject ZH_CN;
 
@@ -35,11 +36,11 @@ public class NameUtil {
      */
     public static String getTranslationName(Material material) {
         if (material == null) return "";
-        return Util.getOrDefault((() ->
-                                      ((material.isBlock()) ?
-                                           ZH_CN.get("block.minecraft." + material.toString().toLowerCase()) :
-                                           ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
-                                      ).getAsString()
+        return ValueUtil.getOrDefault((() ->
+                                           ((material.isBlock()) ?
+                                                ZH_CN.get("block.minecraft." + material.toString().toLowerCase()) :
+                                                ZH_CN.get("item.minecraft." + material.toString().toLowerCase())
+                                           ).getAsString()
         ), material.toString().toLowerCase());
     }
 
@@ -74,7 +75,7 @@ public class NameUtil {
     public static String getTranslationName(EntityType type) {
         if (type == null) return "";
 
-        return Util.getOrDefault(ZH_CN.get("entity.minecraft." + type.toString().toLowerCase()), EMPTY_STR).getAsString();
+        return ValueUtil.getOrDefault(ZH_CN.get("entity.minecraft." + type.toString().toLowerCase()), EMPTY_STR).getAsString();
     }
 
     /**

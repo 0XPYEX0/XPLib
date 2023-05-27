@@ -7,11 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.bukkit.api.Version;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.config.GsonUtil;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
-public class UpdateUtil {
+public class UpdateUtil extends RootUtil {
     /**
      * 从Gitee仓库获取更新资源
      *

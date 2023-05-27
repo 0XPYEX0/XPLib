@@ -1,8 +1,8 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
 import java.util.ArrayList;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -76,12 +76,12 @@ public class CommandMenu {
      */
     @Override
     public String toString() {
-        if (Util.isEmpty(hook)) {
+        if (ValueUtil.isEmpty(hook)) {
             hook = "&f-";
         }
         CommandMessager messager = new CommandMessager();
         for (Pair<String, String> pair : helpList) {
-            messager.plus(MsgUtil.getColorMsg(Util.getOrDefault(start, "") + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + Util.getOrDefault(hook, "&f-") + " &" + helpColor + pair.getValue() + Util.getOrDefault(hook, "")));
+            messager.plus(MsgUtil.getColorMsg(ValueUtil.getOrDefault(start, "") + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + ValueUtil.getOrDefault(hook, "&f-") + " &" + helpColor + pair.getValue() + ValueUtil.getOrDefault(hook, "") + ValueUtil.getOrDefault(end, "")));
         }
         return messager.toString();
     }

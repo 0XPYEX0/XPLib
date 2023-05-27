@@ -1,5 +1,6 @@
 package me.xpyex.plugin.xplib.bukkit.util.strings;
 
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.config.ConfigUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -8,7 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class MsgUtil {
+public class MsgUtil extends RootUtil {
     /**
      * 获取MC的彩色文本
      *

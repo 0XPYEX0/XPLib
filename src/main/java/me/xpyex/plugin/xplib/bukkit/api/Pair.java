@@ -1,6 +1,6 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class Pair<K, V> {
@@ -8,8 +8,8 @@ public class Pair<K, V> {
     private final V value;
 
     public Pair(K key, V value) {
-        Util.checkNull("Pair key is null", key);
-        Util.checkNull("Pair value is null", value);
+        ValueUtil.checkNull("Pair key is null", key);
+        ValueUtil.checkNull("Pair value is null", value);
 
         this.key = key;
         this.value = value;

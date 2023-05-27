@@ -1,7 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,7 @@ public class ModifiableButton extends Button {
     }
 
     public void setStack(ItemStack stack) {
-        Util.checkNull("stack不应为null", stack);
+        ValueUtil.checkNull("stack不应为null", stack);
         this.stack = stack;
     }
 }

@@ -5,10 +5,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
 import org.bukkit.plugin.Plugin;
 
-public class ConfigUtil {
+public class ConfigUtil extends RootUtil {
     private static final HashMap<String, JsonObject> CONFIGS = new HashMap<>();
 
     /**

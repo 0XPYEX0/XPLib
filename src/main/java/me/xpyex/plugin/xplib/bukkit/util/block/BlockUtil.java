@@ -3,8 +3,10 @@ package me.xpyex.plugin.xplib.bukkit.util.block;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import me.xpyex.plugin.xplib.bukkit.XPLib;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import me.xpyex.plugin.xplib.bukkit.util.version.VersionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,7 +16,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class BlockUtil {
+public class BlockUtil extends RootUtil {
     /**
      * 覆盖从loc1到loc2内的所有方块，且线程安全 (不异步执行)
      *
@@ -38,7 +40,7 @@ public class BlockUtil {
      * @param data 将被写入的BlockData (仅1.13+)
      */
     public static void fillBlocks(Location loc1, Location loc2, BlockData data) {
-        Util.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
+        ValueUtil.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
         for (Block block : getBlocks(loc1, loc2)) {
             Bukkit.getScheduler().runTask(XPLib.getInstance(), () -> {
                 block.setBlockData(data);
@@ -55,7 +57,7 @@ public class BlockUtil {
      * @param data 将被写入的BlockData (仅1.13+)
      */
     public static void replaceBlocks(Location loc1, Location loc2, Material what, BlockData data) {
-        Util.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
+        ValueUtil.checkTrue("该方法仅在 MC版本 >= 1.13 时可用", VersionUtil.getMainVersion() >= 13);
         for (Block block : getBlocks(loc1, loc2)) {
             if (block.getType() == what) {
                 Bukkit.getScheduler().runTask(XPLib.getInstance(), () -> {
@@ -92,13 +94,13 @@ public class BlockUtil {
      */
     @NotNull
     public static List<Block> getBlocks(Location loc1, Location loc2) {
-        if (Util.isNull(loc1, loc2) || !loc1.isWorldLoaded() || !loc2.isWorldLoaded()) {
+        if (ValueUtil.isNull(loc1, loc2) || !loc1.isWorldLoaded() || !loc2.isWorldLoaded()) {
             return Collections.emptyList();
         }
         if (loc1.equals(loc2)) {
             return Collections.singletonList(loc1.getBlock());
         }
-        if (loc1.getWorld().equals(loc2.getWorld())) {
+        if (Objects.equals(loc1.getWorld(), loc2.getWorld())) {
             ArrayList<Block> blocks = new ArrayList<>();
             int x1 = Math.min(loc1.getBlockX(), loc2.getBlockX());
             int x2 = Math.max(loc1.getBlockX(), loc2.getBlockX());

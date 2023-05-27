@@ -1,11 +1,13 @@
 package me.xpyex.plugin.xplib.bukkit.util.files;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 
-public class FileUtil {
-    public static void createNewFile(File target, boolean replaced) throws Exception {
+public class FileUtil extends RootUtil {
+    public static void createNewFile(File target, boolean replaced) throws IOException {
         if (replaced) {
             target.delete();
         }
@@ -54,9 +56,9 @@ public class FileUtil {
      * @param target  目标文本
      * @param content 要写出的内容
      * @param attend  是否在原文本的内容基础续写新文本，否则覆写整个文件
-     * @throws Exception 文件异常
+     * @throws IOException 文件异常
      */
-    public static void writeFile(File target, String content, boolean attend) throws Exception {
+    public static void writeFile(File target, String content, boolean attend) throws IOException {
         if (!target.exists()) {
             createNewFile(target, false);
         }
@@ -75,9 +77,9 @@ public class FileUtil {
      *
      * @param target  目标文件
      * @param content 覆写的内容
-     * @throws Exception 文件异常
+     * @throws IOException 文件异常
      */
-    public static void writeFile(File target, String content) throws Exception {
+    public static void writeFile(File target, String content) throws IOException {
         writeFile(target, content, false);
     }
 }

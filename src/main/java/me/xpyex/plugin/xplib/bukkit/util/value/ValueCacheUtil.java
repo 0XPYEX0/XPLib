@@ -2,16 +2,16 @@ package me.xpyex.plugin.xplib.bukkit.util.value;
 
 import java.util.HashMap;
 import java.util.Optional;
-import me.xpyex.plugin.xplib.bukkit.util.Util;
+import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class ValueCacheUtil {
+public class ValueCacheUtil extends RootUtil {
     private static final HashMap<String, HashMap<String, Object>> PLUGIN_VALUES = new HashMap<>();
 
     public static void setData(Plugin plugin, String key, Object value) {
-        if (Util.isEmpty(plugin, key, value)) return;
+        if (ValueUtil.isEmpty(plugin, key, value)) return;
 
         PLUGIN_VALUES.computeIfAbsent(plugin.getName(), map -> new HashMap<>());
         PLUGIN_VALUES.get(plugin.getName()).put(key, value);
@@ -26,7 +26,7 @@ public class ValueCacheUtil {
     }
 
     public static void delData(Plugin plugin, String key) {
-        if (Util.isEmpty(plugin, key)) return;
+        if (ValueUtil.isEmpty(plugin, key)) return;
 
         if (PLUGIN_VALUES.containsKey(plugin.getName())) {
             PLUGIN_VALUES.get(plugin.getName()).remove(key);
@@ -40,7 +40,7 @@ public class ValueCacheUtil {
     }
 
     public static void delList(Plugin plugin, String key) {
-        if (Util.isEmpty(plugin, key)) return;
+        if (ValueUtil.isEmpty(plugin, key)) return;
 
         if (PLUGIN_VALUES.containsKey(plugin.getName())) {
             for (String k : PLUGIN_VALUES.get(plugin.getName()).keySet()) {
@@ -52,7 +52,7 @@ public class ValueCacheUtil {
     }
 
     public static boolean hasData(Plugin plugin, String key) {
-        if (Util.isEmpty(plugin, key)) return false;
+        if (ValueUtil.isEmpty(plugin, key)) return false;
 
         return PLUGIN_VALUES.containsKey(plugin.getName()) && PLUGIN_VALUES.get(plugin.getName()).containsKey(key);
     }
