@@ -29,6 +29,13 @@ public class CommandMenu {
         //
     }
 
+    /**
+     * 构造函数
+     *
+     * @param command   帮助菜单的主命令
+     * @param cmdColor  命令部分以哪个字符染色
+     * @param helpColor 帮助部分由哪个字符染色
+     */
     public CommandMenu(String command, char cmdColor, char helpColor) {
         this(command, cmdColor, helpColor, null, null, null);
         //
