@@ -8,6 +8,7 @@ import me.xpyex.plugin.xplib.bukkit.util.value.ValueCacheUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.event.server.PluginEnableEvent;
 
 public final class XPLib extends XPPlugin {
     private static XPLib INSTANCE;
@@ -55,6 +56,14 @@ public final class XPLib extends XPPlugin {
         getServer().getScheduler().runTaskAsynchronously(getInstance(), () -> {
             hookBStats(17099);
             getLogger().info("与bStats挂钩");
+        });
+        registerListener(new Listener() {
+            @EventHandler
+            public void onPluginLoad(PluginEnableEvent event) {
+                if (event.getPlugin() instanceof XPPlugin) {
+                    event.getPlugin().saveDefaultConfig();
+                }
+            }
         });
         getLogger().info("已加载");
     }

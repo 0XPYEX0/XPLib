@@ -8,8 +8,8 @@ public class Pair<K, V> {
     private final V value;
 
     public Pair(K key, V value) {
-        ValueUtil.checkNull("Pair key is null", key);
-        ValueUtil.checkNull("Pair value is null", value);
+        ValueUtil.notNull("Pair key is null", key);
+        ValueUtil.notNull("Pair value is null", value);
 
         this.key = key;
         this.value = value;

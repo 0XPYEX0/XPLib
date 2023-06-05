@@ -27,7 +27,7 @@ public class Menu {
      * @param player 该Menu会向谁打开
      */
     public Menu(Player player) {
-        ValueUtil.checkNull("Menu必须有一个持有者", player);
+        ValueUtil.notNull("Menu必须有一个持有者", player);
         this.player = player;
     }
 

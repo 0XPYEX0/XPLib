@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 
 public class FileUtil extends RootUtil {
     public static void createNewFile(File target, boolean replaced) throws IOException {
@@ -20,9 +21,7 @@ public class FileUtil extends RootUtil {
             }
             File parent = target;  //先定义文件自身
             while (ex != null) {  //此时文件尚未被创建，故尝试创建父文件夹
-                if (parent == null) {
-                    throw new IllegalStateException("无法创建文件 + " + target.getPath() + " ,原因可能是Java没有访问权限");
-                }
+                ValueUtil.mustTrue("无法创建文件 + " + target.getPath() + " ,原因可能是Java没有访问权限", parent == null);
                 parent = parent.getParentFile();  //寻找所在目录
                 try {
                     parent.mkdirs();  //尝试创建所在目录及其所有父目录

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class MethodUtil extends RootUtil {
     @Nullable
     public static Method getMethod(Class<?> clazz, String name, Class<?>... parmaTypes) {
-        ValueUtil.checkEmpty("参数不应为空值", clazz, name, parmaTypes);
+        ValueUtil.notEmpty("参数不应为空值", clazz, name, parmaTypes);
         try {
             return clazz.getDeclaredMethod(name, parmaTypes);
         } catch (ReflectiveOperationException ignored) {
@@ -28,7 +28,7 @@ public class MethodUtil extends RootUtil {
         }
         try {
             Method objMethod = getMethod(obj.getClass(), method, list.toArray(new Class[0]));
-            ValueUtil.checkNull("类 " + obj.getClass().getSimpleName() + " 内不存在方法 " + method, objMethod);
+            ValueUtil.notNull("类 " + obj.getClass().getSimpleName() + " 内不存在方法 " + method, objMethod);
             assert objMethod != null;
 
             boolean accessible = objMethod.isAccessible();

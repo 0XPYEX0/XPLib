@@ -17,7 +17,7 @@ public class ValueUtil {
      */
     @NotNull
     public static <T> T getOrDefault(T value, T defaulted) {
-        checkNull("Default参数不应为空", defaulted);
+        notNull("Default参数不应为空", defaulted);
         return value != null ? value : defaulted;
     }
 
@@ -31,7 +31,7 @@ public class ValueUtil {
      */
     @NotNull
     public static <T> T getOrDefault(Callable<T> callable, T defaulted, String errMsg) {
-        checkNull("Default参数不应为空", defaulted);
+        notNull("Default参数不应为空", defaulted);
         if (callable == null) {
             return defaulted;
         }
@@ -118,13 +118,19 @@ public class ValueUtil {
         return false;
     }
 
+    @Deprecated
+    public static void checkNull(String errMsg, Object... objects) {
+        notNull(errMsg, objects);
+        //
+    }
+
     /**
      * 检查传入的值是否存在null
      *
      * @param msg     若存在null，抛出IllegalArgumentException，此为描述信息
      * @param objects 要检查的实例
      */
-    public static void checkNull(String msg, Object... objects) {
+    public static void notNull(String msg, Object... objects) {
         if (isNull(objects))
             throw new IllegalArgumentException(msg);
     }
@@ -166,6 +172,12 @@ public class ValueUtil {
         return false;
     }
 
+    @Deprecated
+    public static void checkTrue(String errMsg, boolean... results) {
+        mustTrue(errMsg, results);
+        //
+    }
+
     /**
      * 若条件为false，则抛出IllegalStateException
      * 若传入多个条件，且其中之一为false，则抛出IllegalStateException
@@ -173,10 +185,16 @@ public class ValueUtil {
      * @param errMsg  错误信息
      * @param results 条件
      */
-    public static void checkTrue(String errMsg, boolean... results) {
+    public static void mustTrue(String errMsg, boolean... results) {
         for (boolean result : results)
             if (!result)
                 throw new IllegalStateException(errMsg);
+    }
+
+    @Deprecated
+    public static void checkEmpty(String errMsg, Object... objects) {
+        notEmpty(errMsg, objects);
+        //
     }
 
     /**
@@ -185,7 +203,7 @@ public class ValueUtil {
      * @param errMsg  若存在空值(不止null)，抛出IllegalArgumentException，此为描述信息
      * @param objects 要检查的实例
      */
-    public static void checkEmpty(String errMsg, Object... objects) {
+    public static void notEmpty(String errMsg, Object... objects) {
         if (isEmpty(objects))
             throw new IllegalArgumentException(errMsg);
     }

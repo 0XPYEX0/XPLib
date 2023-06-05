@@ -30,8 +30,8 @@ public class TaskUtil extends RootUtil {
      * @return 返回需要获取的值
      */
     public static <T> T repeatIfError(TryCallable<T> callable, long repeatTimes, long waitMillis) {
-        ValueUtil.checkNull("该执行的内容不为空", callable);
-        ValueUtil.checkTrue("repeatTimes不应为负数", repeatTimes < 0);
+        ValueUtil.notNull("该执行的内容不为空", callable);
+        ValueUtil.mustTrue("repeatTimes不应为负数", repeatTimes < 0);
         if (repeatTimes == 0) {
             while (true) {
                 try {

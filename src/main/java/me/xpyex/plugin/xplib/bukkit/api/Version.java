@@ -10,7 +10,7 @@ public class Version {
     private final String ver;
 
     public Version(String ver) {
-        ValueUtil.checkNull("ver不应为空", ver);
+        ValueUtil.notNull("ver不应为空", ver);
         this.ver = ver;
         String mainVer;
         if (ver.contains("-")) {

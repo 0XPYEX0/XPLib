@@ -4,6 +4,7 @@ import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ModifiableButton extends Button {
     private ButtonReturnItem returnItemEffect;
-    private ItemStack stack = new ItemStack(Material.AIR);
+    private @NotNull ItemStack stack = new ItemStack(Material.AIR);
 
     public ModifiableButton(Menu menu, ButtonCondition condition) {
         super(menu, condition);
@@ -30,13 +31,14 @@ public class ModifiableButton extends Button {
     }
 
     @Override
+    @NotNull
     public ItemStack getStack() {
         return stack;
         //
     }
 
     public void setStack(ItemStack stack) {
-        ValueUtil.checkNull("stack不应为null", stack);
+        ValueUtil.notNull("stack不应为null", stack);
         this.stack = stack;
     }
 }

@@ -1,6 +1,8 @@
 package me.xpyex.plugin.xplib.bukkit.util.inventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
@@ -20,6 +22,7 @@ public class ItemUtil extends RootUtil {
      * @return 全新的ItemStack
      */
     public static ItemStack getItemStack(ItemStack stack, String name, String... lore) {
+        ValueUtil.notNull("参数不应为null", stack, name, lore);
         ItemStack out = new ItemStack(stack);
         ItemMeta meta = out.getItemMeta();
         meta.setDisplayName(MsgUtil.getColorMsg(name));
@@ -41,6 +44,7 @@ public class ItemUtil extends RootUtil {
      * @return 全新的ItemStack
      */
     public static ItemStack getItemStack(Material material, String name, String... lore) {
+        ValueUtil.notNull("参数不应为null", material, name, lore);
         return getItemStack(new ItemStack(material), name, lore);
         //
     }

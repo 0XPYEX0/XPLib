@@ -15,9 +15,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,15 +26,6 @@ public abstract class XPPlugin extends JavaPlugin {
     private JsonObject defaultConfig = null;
     private JsonObject defaultPlayerConfig = null;
 
-    public XPPlugin() {
-        this.registerListener(new Listener() {
-            @EventHandler
-            public void onPluginLoad(PluginEnableEvent event) {
-                saveDefaultConfig();
-            }
-        });
-    }
-
     public Metrics hookBStats(int id) {
         return new Metrics(this, id);
         //
@@ -44,7 +33,7 @@ public abstract class XPPlugin extends JavaPlugin {
 
     public void registerCmd(String command, @Nullable CommandExecutor executor, @Nullable TabCompleter completer) throws IllegalArgumentException {
         PluginCommand cmd = this.getCommand(command);
-        ValueUtil.checkNull("未在 plugin.yml 内注册命令: " + command, cmd);
+        ValueUtil.notNull("未在 plugin.yml 内注册命令: " + command, cmd);
         assert cmd != null;
 
         cmd.setExecutor(executor);

@@ -14,7 +14,7 @@ public abstract class Button {
     private ButtonClickEffect clickEffect;
 
     public Button(Menu menu, ButtonCondition condition) {
-        ValueUtil.checkNull("menu或condition不应为null", menu, condition);
+        ValueUtil.notNull("menu或condition不应为null", menu, condition);
         this.condition = condition;
         this.menu = menu;
         //
@@ -61,11 +61,10 @@ public abstract class Button {
      *
      * @return 该Button实例在当前状态对应的ItemStack
      */
+    @NotNull
     public ItemStack getStack() {
         int i = condition.apply(menu.getPlayer());
-        if (!MODES.containsKey(i)) {
-            throw new IllegalStateException("按钮不存在该状态: " + i);
-        }
+        ValueUtil.mustTrue("按钮不存在该状态: " + i, MODES.containsKey(i));
         return MODES.get(i);
     }
 
@@ -86,6 +85,7 @@ public abstract class Button {
      * @param effect 待执行的方法体
      * @return 返回自身，制造链式代码
      */
+    @NotNull
     public Button setClickEffect(ButtonClickEffect effect) {
         this.clickEffect = effect;
         return this;
