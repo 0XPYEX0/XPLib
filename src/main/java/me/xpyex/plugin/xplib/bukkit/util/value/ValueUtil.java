@@ -5,9 +5,26 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
 public class ValueUtil {
+    /**
+     * 当值非null时执行方法体，类似Optional
+     *
+     * @param obj  要检查的对象
+     * @param func 若obj非null，执行此方法体
+     */
+    public static <T> void ifPresent(T obj, Consumer<T> func) {
+        notNull("待执行的方法体为null", func);
+        if (obj != null)
+            try {
+                func.accept(obj);
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+    }
+
     /**
      * 安全获取值，类似Optional
      *
