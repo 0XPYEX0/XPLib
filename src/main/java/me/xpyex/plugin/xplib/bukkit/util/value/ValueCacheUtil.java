@@ -18,11 +18,8 @@ public class ValueCacheUtil extends RootUtil {
     }
 
     public static void setData(String key, MetadataValue value) {
-        Plugin plugin = value.getOwningPlugin();
-        if (plugin == null) {
-            throw new IllegalArgumentException("This MetadataValue does not contain a plugin!");
-        }
-        setData(plugin, key, value.value());
+        ValueUtil.notNull("This MetadataValue does not contain a plugin!", key, value, value.getOwningPlugin(), value.value());
+        setData(value.getOwningPlugin(), key, value.value());
     }
 
     public static void delData(Plugin plugin, String key) {
