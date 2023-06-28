@@ -24,7 +24,7 @@ public class ValueCacheUtil extends RootUtil {
     public static void delData(Plugin plugin, String key) {
         if (ValueUtil.isEmpty(plugin, key)) return;
 
-        PLUGIN_VALUES.computeIfPresent(plugin.getName(), (s, stringObjectHashMap) -> stringObjectHashMap).remove(key);
+        ValueUtil.ifPresent(PLUGIN_VALUES.get(plugin.getName()), map -> map.remove(key));
     }
 
     public static void delData(Plugin plugin) {
