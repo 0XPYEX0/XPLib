@@ -13,8 +13,7 @@ public class ValueCacheUtil extends RootUtil {
     public static void setData(Plugin plugin, String key, Object value) {
         if (ValueUtil.isEmpty(plugin, key, value)) return;
 
-        PLUGIN_VALUES.computeIfAbsent(plugin.getName(), map -> new HashMap<>());
-        PLUGIN_VALUES.get(plugin.getName()).put(key, value);
+        PLUGIN_VALUES.computeIfAbsent(plugin.getName(), map -> new HashMap<>()).put(key, value);
     }
 
     public static void setData(String key, MetadataValue value) {
@@ -25,9 +24,7 @@ public class ValueCacheUtil extends RootUtil {
     public static void delData(Plugin plugin, String key) {
         if (ValueUtil.isEmpty(plugin, key)) return;
 
-        if (PLUGIN_VALUES.containsKey(plugin.getName())) {
-            PLUGIN_VALUES.get(plugin.getName()).remove(key);
-        }
+        PLUGIN_VALUES.computeIfPresent(plugin.getName(), (s, stringObjectHashMap) -> stringObjectHashMap).remove(key);
     }
 
     public static void delData(Plugin plugin) {
@@ -57,11 +54,8 @@ public class ValueCacheUtil extends RootUtil {
     @NotNull
     @SuppressWarnings("unchecked")
     public static <T> Optional<T> getData(Plugin plugin, String key) {
-        Optional<T> o = Optional.empty();
-        if (hasData(plugin, key)) {
-            o = Optional.of((T) PLUGIN_VALUES.get(plugin.getName()).get(key));
-        }
-        return o;
+        return Optional.ofNullable((T) PLUGIN_VALUES.get(plugin.getName()).get(key));
+        //
     }
 
     @NotNull
