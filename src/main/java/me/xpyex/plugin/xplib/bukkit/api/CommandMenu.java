@@ -72,7 +72,7 @@ public class CommandMenu {
         if (argument == null || help == null || argument.isEmpty()) {  //help可为空值，仅描述有子参数，但不提供教程
             return this;
         }
-        helpList.add(new Pair<>(argument, help));
+        helpList.add(Pair.of(argument, help));
         return this;
     }
 

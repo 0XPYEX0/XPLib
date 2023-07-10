@@ -145,7 +145,7 @@ public class Menu {
     @NotNull
     public Menu setButton(int page, int slot, Button button) {
         if (button != null) {
-            buttons.put(new Pair<>(page, slot), button);
+            buttons.put(Pair.of(page, slot), button);
         }
         return this;
     }
@@ -227,7 +227,7 @@ public class Menu {
      */
     @Nullable
     public Button getButton(int slot) {
-        Pair<Integer, Integer> pair = new Pair<>(getOpeningPage(), slot);
+        Pair<Integer, Integer> pair = Pair.of(getOpeningPage(), slot);
         for (Pair<Integer, Integer> i : buttons.keySet()) {
             if (i.equals(pair)) {
                 return buttons.get(i);

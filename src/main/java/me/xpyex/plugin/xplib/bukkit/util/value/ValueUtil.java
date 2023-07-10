@@ -224,4 +224,15 @@ public class ValueUtil {
         if (isEmpty(objects))
             throw new IllegalArgumentException(errMsg);
     }
+
+    @SafeVarargs
+    public static <T> boolean equalsOr(T target, T... values) {
+        notNull("值不应为null", target, values);
+        for (T value : values) {
+            if (target == value) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

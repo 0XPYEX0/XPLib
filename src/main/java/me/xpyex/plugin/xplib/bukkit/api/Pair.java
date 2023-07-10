@@ -1,18 +1,25 @@
 package me.xpyex.plugin.xplib.bukkit.api;
 
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Pair<K, V> {
     private final K key;
     private final V value;
 
-    public Pair(K key, V value) {
+    private Pair(K key, V value) {
         ValueUtil.notNull("Pair key is null", key);
         ValueUtil.notNull("Pair value is null", value);
 
         this.key = key;
         this.value = value;
+    }
+
+    @Contract("_, _ -> new")
+    public static <K, V> Pair<K, V> of(K key, V value) {
+        return new Pair<>(key, value);
+        //
     }
 
     @NotNull
