@@ -6,7 +6,7 @@ import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import org.bukkit.Bukkit;
 
 public class VersionUtil extends RootUtil {
-    public static final Version VERSION = new Version(XPLib.getInstance().getDescription().getVersion());
+    private static final Version XPLIB_VER = new Version(XPLib.getInstance().getDescription().getVersion());
     private static final int MAIN_VERSION = new Version(Bukkit.getBukkitVersion()).getVersion(1);
 
     public static int getMainVersion() {
@@ -20,12 +20,12 @@ public class VersionUtil extends RootUtil {
     }
 
     public static boolean requireXPLib(Version version) {
-        return version.compareTo(VERSION) <= 0;
+        return version.compareTo(XPLIB_VER) <= 0;
         //
     }
 
     public static Version getXPLibVersion() {
-        return VERSION;
+        return XPLIB_VER;
         //
     }
 }
