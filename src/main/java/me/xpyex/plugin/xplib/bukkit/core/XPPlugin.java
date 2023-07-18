@@ -69,21 +69,11 @@ public abstract class XPPlugin extends JavaPlugin {
     public void saveDefaultConfig() {
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             if (defaultConfig != null) {
-                try {
-                    FileUtil.writeFile(getConfigFile(), GsonUtil.parseStr(defaultConfig));
-                } catch (IOException e) {
-                    MsgUtil.debugLog(this, e);
-                }
+                ConfigUtil.saveConfig(this, "config", GsonUtil.parseStr(defaultConfig), false);
             }
             if (defaultPlayerConfig != null) {
                 for (Player player : getServer().getOnlinePlayers()) {
-                    if (hasConfig(player)) continue;
-
-                    try {
-                        FileUtil.writeFile(getConfigFile(player), GsonUtil.parseStr(defaultPlayerConfig));
-                    } catch (IOException e) {
-                        MsgUtil.debugLog(this, e);
-                    }
+                    ConfigUtil.saveConfig(this, "players/" + player.getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
                 }
             }
         });
