@@ -19,7 +19,13 @@ public class VersionUtil extends RootUtil {
         //
     }
 
+    @Deprecated
     public static boolean requireXPLib(Version version) {
+        return isLowerXPLib(version);
+        //
+    }
+
+    public static boolean isLowerXPLib(Version version) {
         return version.compareTo(XPLIB_VER) <= 0;
         //
     }
