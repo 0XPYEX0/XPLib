@@ -21,12 +21,17 @@ public class VersionUtil extends RootUtil {
 
     @Deprecated
     public static boolean requireXPLib(Version version) {
-        return isLowerXPLib(version);
+        return isUpperXPLib(version);
         //
     }
 
-    public static boolean isLowerXPLib(Version version) {
-        return version.compareTo(XPLIB_VER) <= 0;
+    /**
+     * 检查XPLib的版本是否比要求版本更高
+     * @param version 目标版本
+     * @return 若XPLib版本高于或等于version，返回true；反之返回false
+     */
+    public static boolean isUpperXPLib(Version version) {
+        return XPLIB_VER.compareTo(version) >= 0;
         //
     }
 
