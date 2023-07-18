@@ -27,6 +27,7 @@ public class VersionUtil extends RootUtil {
 
     /**
      * 检查XPLib的版本是否比要求版本更高
+     *
      * @param version 目标版本
      * @return 若XPLib版本高于或等于version，返回true；反之返回false
      */

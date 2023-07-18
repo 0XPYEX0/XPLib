@@ -38,9 +38,9 @@ public class FileUtil extends RootUtil {
      *
      * @param target 目标文本文件
      * @return 目标文件的文本
-     * @throws Exception 文件异常
+     * @throws IOException 文件异常
      */
-    public static String readFile(File target) throws Exception {
+    public static String readFile(File target) throws IOException {
         Scanner in = new Scanner(target, "UTF-8");
         StringBuilder builder = new StringBuilder();
         while (in.hasNextLine()) {

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class MethodUtil extends RootUtil {
     @Nullable
     public static Method getMethod(Class<?> clazz, String name, Class<?>... parmaTypes) {
-        ValueUtil.notEmpty("参数不应为空值", clazz, name, parmaTypes);
+        ValueUtil.notEmpty("参数不应为空值", clazz, name);
         try {
             return clazz.getDeclaredMethod(name, parmaTypes);
         } catch (ReflectiveOperationException ignored) {
@@ -22,6 +22,7 @@ public class MethodUtil extends RootUtil {
     @Nullable
     @SuppressWarnings("unchecked")
     public static <T> T executeMethod(Object obj, String method, Object... parma) {
+        ValueUtil.notNull("执行方法的对象或方法名为null", obj, method);
         ArrayList<Class<?>> list = new ArrayList<>();
         for (Object o : parma) {
             list.add(o.getClass());
@@ -37,7 +38,33 @@ public class MethodUtil extends RootUtil {
             objMethod.setAccessible(accessible);
 
             return (T) result;
-        } catch (ReflectiveOperationException ignored) {
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public static <T> T executeStaticMethod(Class<?> clazz, String method, Object... parma) {
+        ValueUtil.notNull("执行静态方法的目标类或方法名为null", clazz, method);
+        ArrayList<Class<?>> list = new ArrayList<>();
+        for (Object o : parma) {
+            list.add(o.getClass());
+        }
+        try {
+            Method classMethod = getMethod(clazz, method, list.toArray(new Class[0]));
+            ValueUtil.notNull("类 " + clazz.getSimpleName() + " 内不存在方法 " + method, classMethod);
+            assert  classMethod != null;
+
+            boolean accessible = classMethod.isAccessible();
+            classMethod.setAccessible(true);
+            Object result = classMethod.invoke(null, parma);
+            classMethod.setAccessible(accessible);
+
+            return (T) result;
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
             return null;
         }
     }
