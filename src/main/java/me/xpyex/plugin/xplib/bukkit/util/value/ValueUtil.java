@@ -25,18 +25,18 @@ public class ValueUtil {
      *
      * @param obj       要检查的对象
      * @param ifPresent 若obj非null，执行此方法体
-     * @param orElse    若obj或ifPresent为null，执行此方法体
+     * @param ifNull    若obj或ifPresent为null，执行此方法体
      */
-    public static <T> void optional(T obj, Consumer<T> ifPresent, Runnable orElse) {
+    public static <T> void optional(T obj, Consumer<T> ifPresent, Runnable ifNull) {
         if (!isNull(obj, ifPresent)) {
             try {
                 ifPresent.accept(obj);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else if (orElse != null) {
+        } else if (ifNull != null) {
             try {
-                orElse.run();
+                ifNull.run();
             } catch (Throwable e) {
                 e.printStackTrace();
             }
@@ -47,11 +47,11 @@ public class ValueUtil {
      * 当值为null时执行方法体，类似Optional
      *
      * @param obj    要检查的对象
-     * @param orElse 若obj为null，执行此方法体
+     * @param ifNull 若obj为null，执行此方法体
      */
-    public static void orElse(Object obj, Runnable orElse) {
-        notNull("参数不应为null", orElse);
-        optional(obj, null, orElse);
+    public static void ifNull(Object obj, Runnable ifNull) {
+        notNull("参数不应为null", ifNull);
+        optional(obj, null, ifNull);
     }
 
     /**
