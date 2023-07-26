@@ -55,7 +55,7 @@ public class MethodUtil extends RootUtil {
         try {
             Method classMethod = getMethod(clazz, method, list.toArray(new Class[0]));
             ValueUtil.notNull("类 " + clazz.getSimpleName() + " 内不存在方法 " + method, classMethod);
-            assert  classMethod != null;
+            assert classMethod != null;
 
             boolean accessible = classMethod.isAccessible();
             classMethod.setAccessible(true);

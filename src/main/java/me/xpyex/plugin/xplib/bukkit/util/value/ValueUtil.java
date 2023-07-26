@@ -12,17 +12,46 @@ public class ValueUtil {
     /**
      * 当值非null时执行方法体，类似Optional
      *
-     * @param obj  要检查的对象
-     * @param func 若obj非null，执行此方法体
+     * @param obj       要检查的对象
+     * @param ifPresent 若obj非null，执行此方法体
      */
-    public static <T> void ifPresent(T obj, Consumer<T> func) {
-        notNull("待执行的方法体为null", func);
-        if (obj != null)
+    public static <T> void ifPresent(T obj, Consumer<T> ifPresent) {
+        notNull("待执行的方法体为null", ifPresent);
+        optional(obj, ifPresent, null);
+    }
+
+    /**
+     * 根据值是否为null执行不同的方法体，类似Optional
+     *
+     * @param obj       要检查的对象
+     * @param ifPresent 若obj非null，执行此方法体
+     * @param orElse    若obj或ifPresent为null，执行此方法体
+     */
+    public static <T> void optional(T obj, Consumer<T> ifPresent, Runnable orElse) {
+        if (!isNull(obj, ifPresent)) {
             try {
-                func.accept(obj);
+                ifPresent.accept(obj);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
+        } else if (orElse != null) {
+            try {
+                orElse.run();
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 当值为null时执行方法体，类似Optional
+     *
+     * @param obj    要检查的对象
+     * @param orElse 若obj为null，执行此方法体
+     */
+    public static void orElse(Object obj, Runnable orElse) {
+        notNull("参数不应为null", orElse);
+        optional(obj, null, orElse);
     }
 
     /**
