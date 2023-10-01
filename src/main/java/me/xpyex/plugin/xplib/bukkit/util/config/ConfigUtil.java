@@ -86,13 +86,13 @@ public class ConfigUtil extends RootUtil {
         }
         File folder = new File(plugin.getDataFolder(), path);
         ValueUtil.mustTrue(plugin.getName() + " 目录下没有 " + path + " 目录", folder.exists());
-        ValueUtil.mustTrue("在 " + plugin.getName() + " 目录下已存在 " + path + " ，且非一个文件夹", folder.isDirectory());
+        ValueUtil.mustTrue("在 " + plugin.getName() + " 目录下已存在 " + path + " ，且非一个文件夹", !folder.isDirectory());
 
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith(".json")) {
                 JsonObject o = GsonUtil.parseJsonObject(FileUtil.readFile(file));
                 result.add(o);
-                CONFIGS.put(plugin.getName() + "/" + path + "/" + file.getPath(), o);
+                CONFIGS.put(plugin.getName() + "/" + path + "/" + file.getName(), o);
             }
         }
         return result;

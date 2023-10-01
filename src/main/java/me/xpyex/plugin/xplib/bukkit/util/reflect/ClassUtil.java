@@ -2,12 +2,12 @@ package me.xpyex.plugin.xplib.bukkit.util.reflect;
 
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import sun.reflect.Reflection;
 
 public class ClassUtil extends RootUtil {
-    @Nullable
-    public static Class<?> getClass(String name, boolean needInitClass, boolean isDeepSearch) {
+    @NotNull
+    public static Class<?> getClass(String name, boolean needInitClass, boolean isDeepSearch) throws ClassNotFoundException {
         try {
             return Class.forName(name, needInitClass, Reflection.getCallerClass().getClassLoader());
         } catch (ReflectiveOperationException ignored) {
@@ -25,7 +25,7 @@ public class ClassUtil extends RootUtil {
                             }
                         }
                     }
-                    return null;
+                    throw new ClassNotFoundException();
                 }
             }
         }

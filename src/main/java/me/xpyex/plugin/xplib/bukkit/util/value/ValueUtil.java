@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -258,7 +259,7 @@ public class ValueUtil {
     public static <T> boolean equalsOr(T target, T... values) {
         notNull("值不应为null", target, values);
         for (T value : values) {
-            if (target == value) {
+            if (Objects.equals(target,  value)) {
                 return true;
             }
         }

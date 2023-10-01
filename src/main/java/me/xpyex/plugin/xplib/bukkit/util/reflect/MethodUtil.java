@@ -4,68 +4,56 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class MethodUtil extends RootUtil {
-    @Nullable
-    public static Method getMethod(Class<?> clazz, String name, Class<?>... parmaTypes) {
+    @NotNull
+    public static Method getMethod(Class<?> clazz, String name, Class<?>... parmaTypes) throws ReflectiveOperationException {
         ValueUtil.notEmpty("参数不应为空值", clazz, name);
         try {
             return clazz.getDeclaredMethod(name, parmaTypes);
         } catch (ReflectiveOperationException ignored) {
             if (clazz.getSuperclass() != null)
                 return getMethod(clazz.getSuperclass(), name, parmaTypes);
+            throw new NoSuchMethodException(clazz.getSimpleName() + " 类中不存在方法 " + name);
         }
-        return null;
     }
 
-    @Nullable
+    @NotNull
     @SuppressWarnings("unchecked")
-    public static <T> T executeMethod(Object obj, String method, Object... parma) {
+    public static <T> T executeInstanceMethod(Object obj, String method, Object... parma) throws ReflectiveOperationException {
         ValueUtil.notNull("执行方法的对象或方法名为null", obj, method);
         ArrayList<Class<?>> list = new ArrayList<>();
         for (Object o : parma) {
             list.add(o.getClass());
         }
-        try {
-            Method objMethod = getMethod(obj.getClass(), method, list.toArray(new Class[0]));
-            ValueUtil.notNull("类 " + obj.getClass().getSimpleName() + " 内不存在方法 " + method, objMethod);
-            assert objMethod != null;
-
-            boolean accessible = objMethod.isAccessible();
-            objMethod.setAccessible(true);
-            Object result = objMethod.invoke(obj, parma);
-            objMethod.setAccessible(accessible);
-
-            return (T) result;
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-            return null;
-        }
+        Method objMethod = getMethod(obj.getClass(), method, list.toArray(new Class[0]));
+        boolean accessible = objMethod.isAccessible();
+        objMethod.setAccessible(true);
+        Object result = objMethod.invoke(obj, parma);
+        objMethod.setAccessible(accessible);
+        return (T) result;
     }
 
-    @Nullable
+    @NotNull
     @SuppressWarnings("unchecked")
-    public static <T> T executeStaticMethod(Class<?> clazz, String method, Object... parma) {
+    public static <T> T executeClassMethod(Class<?> clazz, String method, Object... parma) throws ReflectiveOperationException {
         ValueUtil.notNull("执行静态方法的目标类或方法名为null", clazz, method);
         ArrayList<Class<?>> list = new ArrayList<>();
         for (Object o : parma) {
             list.add(o.getClass());
         }
-        try {
-            Method classMethod = getMethod(clazz, method, list.toArray(new Class[0]));
-            ValueUtil.notNull("类 " + clazz.getSimpleName() + " 内不存在方法 " + method, classMethod);
-            assert classMethod != null;
+        Method classMethod = getMethod(clazz, method, list.toArray(new Class[0]));
+        boolean accessible = classMethod.isAccessible();
+        classMethod.setAccessible(true);
+        Object result = classMethod.invoke(null, parma);
+        classMethod.setAccessible(accessible);
+        return (T) result;
+    }
 
-            boolean accessible = classMethod.isAccessible();
-            classMethod.setAccessible(true);
-            Object result = classMethod.invoke(null, parma);
-            classMethod.setAccessible(accessible);
-
-            return (T) result;
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-            return null;
-        }
+    @NotNull
+    public static <T> T executeClassMethod(String className, String method, Object... parma) throws ReflectiveOperationException {
+        return executeClassMethod(ClassUtil.getClass(className, false, false), method, parma);
+        //
     }
 }

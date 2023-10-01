@@ -86,7 +86,7 @@ public class CommandMenu {
         if (ValueUtil.isEmpty(hook)) {
             hook = "&f-";
         }
-        CommandMessager messager = new CommandMessager();
+        MessageBuilder messager = new MessageBuilder();
         for (Pair<String, String> pair : helpList) {
             messager.plus(MsgUtil.getColorMsg(ValueUtil.getOrDefault(start, "") + "&" + cmdColor + "/" + command + " " + pair.getKey() + " " + ValueUtil.getOrDefault(hook, "&f-") + " &" + helpColor + pair.getValue() + ValueUtil.getOrDefault(hook, "") + ValueUtil.getOrDefault(end, "")));
         }

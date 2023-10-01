@@ -2,8 +2,10 @@ package me.xpyex.plugin.xplib.bukkit.core;
 
 import com.google.gson.JsonObject;
 import java.io.File;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import me.xpyex.plugin.xplib.bukkit.api.NationalMessage;
 import me.xpyex.plugin.xplib.bukkit.bstats.Metrics;
 import me.xpyex.plugin.xplib.bukkit.util.config.ConfigUtil;
 import me.xpyex.plugin.xplib.bukkit.util.config.GsonUtil;
@@ -12,7 +14,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +26,7 @@ public abstract class XPPlugin extends JavaPlugin {
     private final File configFile = new File(getDataFolder(), "config.json");
     private JsonObject defaultConfig = null;
     private JsonObject defaultPlayerConfig = null;
+    private boolean registeredDefaultPConfig = false;
 
     public Metrics hookBStats(int id) {
         return new Metrics(this, id);
@@ -59,7 +64,15 @@ public abstract class XPPlugin extends JavaPlugin {
 
     public void setDefaultPlayerConfig(JsonObject defaultPlayerConfig) {
         this.defaultPlayerConfig = defaultPlayerConfig;
-        //
+        if (!registeredDefaultPConfig) {
+            registeredDefaultPConfig = true;
+            registerListener(new Listener() {
+                @EventHandler
+                public void onJoin(PlayerJoinEvent event) {
+                    ConfigUtil.saveConfig(XPPlugin.this, "players/" + event.getPlayer().getUniqueId() + ".json", GsonUtil.parseStr(defaultPlayerConfig), false);
+                }
+            });
+        }
     }
 
     @Override
@@ -70,7 +83,7 @@ public abstract class XPPlugin extends JavaPlugin {
             }
             if (defaultPlayerConfig != null) {
                 for (Player player : getServer().getOnlinePlayers()) {
-                    ConfigUtil.saveConfig(this, "players/" + player.getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
+                    ConfigUtil.saveConfig(this, "players/" + player.getUniqueId() + ".json", GsonUtil.parseStr(defaultPlayerConfig), false);
                 }
             }
         });
@@ -110,5 +123,15 @@ public abstract class XPPlugin extends JavaPlugin {
     public <T> T getJsonConfig(Class<T> type) {
         return ConfigUtil.getConfig(this, type);
         //
+    }
+
+    public String getI18N(String key) {
+        return getI18N(Locale.getDefault(), key);
+        //
+    }
+
+    public String getI18N(Locale locale, String key) {
+        NationalMessage config = ConfigUtil.getConfig(this, "messages/" + locale.getLanguage(), NationalMessage.class);
+        return "Uncompleted";
     }
 }

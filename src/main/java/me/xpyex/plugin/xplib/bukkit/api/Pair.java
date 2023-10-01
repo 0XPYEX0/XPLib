@@ -16,6 +16,7 @@ public class Pair<K, V> {
         this.value = value;
     }
 
+    @NotNull
     @Contract("_, _ -> new")
     public static <K, V> Pair<K, V> of(K key, V value) {
         return new Pair<>(key, value);
