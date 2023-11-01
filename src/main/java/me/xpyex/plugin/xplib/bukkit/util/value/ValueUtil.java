@@ -17,7 +17,7 @@ public class ValueUtil {
      * @param ifPresent 若obj非null，执行此方法体
      */
     public static <T> void ifPresent(T obj, Consumer<T> ifPresent) {
-        notNull("待执行的方法体为null", ifPresent);
+        notNull("待执行的方法体不应为null", ifPresent);
         optional(obj, ifPresent, null);
     }
 
@@ -29,7 +29,10 @@ public class ValueUtil {
      * @param ifNull    若obj或ifPresent为null，执行此方法体
      */
     public static <T> void optional(T obj, Consumer<T> ifPresent, Runnable ifNull) {
-        if (!isNull(obj, ifPresent)) {
+        if (obj != null) {
+            if (ifPresent == null) {
+                return;
+            }
             try {
                 ifPresent.accept(obj);
             } catch (Throwable e) {
@@ -56,6 +59,19 @@ public class ValueUtil {
     }
 
     /**
+     * 已过时 <br>
+     * 请使用 {@link me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil#ifNull(Object, Runnable)} <br>
+     * 当值为null时执行方法体，类似Optional
+     *
+     * @param obj    要检查的对象
+     * @param orElse 若obj为null，执行此方法体
+     */
+    @Deprecated
+    public static void orElse(Object obj, Runnable orElse) {
+        ifNull(obj, orElse);
+    }
+
+    /**
      * 安全获取值，类似Optional
      *
      * @param value     需要判定的值.
@@ -64,7 +80,7 @@ public class ValueUtil {
      */
     @NotNull
     public static <T> T getOrDefault(T value, T defaulted) {
-        notNull("Default参数不应为空", defaulted);
+        notNull("待执行的方法体不应为null", defaulted);
         return value != null ? value : defaulted;
     }
 
@@ -259,7 +275,7 @@ public class ValueUtil {
     public static <T> boolean equalsOr(T target, T... values) {
         notNull("值不应为null", target, values);
         for (T value : values) {
-            if (Objects.equals(target,  value)) {
+            if (Objects.equals(target, value)) {
                 return true;
             }
         }

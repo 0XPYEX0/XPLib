@@ -54,15 +54,23 @@ public class MapBuilder<K, V> {
         return this;
     }
 
-    public MapBuilder<K, V> putIfTrue(boolean condition, K key, V value) {
+    public MapBuilder<K, V> putIfTrue(boolean condition, TryCallable<K> key, TryCallable<V> value) {
         if (condition)
-            return put(key, value);
+            try {
+                return put(key.call(), value.call());
+            } catch (Throwable e) {
+                throw new IllegalStateException(e);
+            }
         return this;
     }
 
-    public MapBuilder<K, V> removeIfTrue(boolean condition, K key, V value) {
+    public MapBuilder<K, V> removeIfTrue(boolean condition, TryCallable<K> key) {
         if (condition)
-            return remove(key);
+            try {
+                return remove(key.call());
+            } catch (Throwable e) {
+                throw new IllegalStateException(e);
+            }
         return this;
     }
 

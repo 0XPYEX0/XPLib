@@ -1,7 +1,11 @@
 package me.xpyex.plugin.xplib.bukkit.util.config;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,5 +141,99 @@ public class ConfigUtil extends RootUtil {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取JsonObject下的某个键值 <br>
+     * 若键值不存在，返回null
+     * 若存在，返回包含值的JsonPrimitive
+     *
+     * @param obj JsonObject对象
+     * @param key 键名. 例: 填入a.b，则获取名称为a的JsonObject下的b值
+     * @return 值，但不一定有内容. JsonPrimitive必有内容
+     */
+    public static JsonPrimitive getValue(JsonObject obj, String key) {
+        ValueUtil.notNull("需要获取的键名为空", key);
+        String[] keys = key.split("\\.");
+
+        if (keys.length >= 1) {
+            JsonObject root = GsonUtil.copy(obj);
+            for (int i = 0; i < keys.length; i++) {
+                if (i == keys.length - 1) {  //最后一个值
+                    return (JsonPrimitive) root.get(keys[i]);
+                }
+
+                root = root.get(keys[i]).getAsJsonObject();  //不是最后一个值，默认都为JsonObject; 若否，则抛出IllegalStateException
+            }
+        } else {
+            return obj.get(key).getAsJsonPrimitive();
+        }
+        throw new IllegalStateException("未获取到键值: " + key);  //抛出IllegalStateException
+    }
+
+    public static String getStrValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsString();
+        //
+    }
+
+
+    public static int getIntValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsInt();
+        //
+    }
+
+    public static long getLongValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsLong();
+        //
+    }
+
+    public static boolean getBoolValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsBoolean();
+        //
+    }
+
+    public static float getFloatValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsFloat();
+        //
+    }
+
+    public static double getDoubleValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsDouble();
+        //
+    }
+
+    public static short getShortValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsShort();
+        //
+    }
+
+    public static byte getByteValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsByte();
+        //
+    }
+
+    public static BigInteger getBigIntValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsBigInteger();
+        //
+    }
+
+    public static BigDecimal getBigDecimalValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsBigDecimal();
+        //
+    }
+
+    public static Number getNumberValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsNumber();
+        //
+    }
+
+    public static JsonArray getJsonArrayValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsJsonArray();
+        //
+    }
+
+    public static JsonObject getJsonObjectValue(JsonObject obj, String key) {
+        return getValue(obj, key).getAsJsonObject();
+        //
     }
 }

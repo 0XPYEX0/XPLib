@@ -17,7 +17,7 @@ public class Menu {
     private static final HashMap<UUID, Menu> MENUS = new HashMap<>();
     private final HashMap<Pair<Integer, Integer>, Button> buttons = new HashMap<>();
     private final Player player;
-    private final HashMap<Integer, InvSetter> setters = new HashMap<>();
+    private final HashMap<Integer, InvBuilder> setters = new HashMap<>();
     private final HashMap<Integer, Inventory> pages = new HashMap<>();
     private int openingPage;
 
@@ -72,7 +72,7 @@ public class Menu {
      * @return 返回自身，创建链式代码
      */
     @NotNull
-    public Menu setPage(int page, InvSetter setter) {
+    public Menu setPage(int page, InvBuilder setter) {
         this.setters.put(page, setter);
         return this;
     }
@@ -92,7 +92,7 @@ public class Menu {
                 pattern.add("         ");
             }
         }
-        return setPage(page, new InvSetter(title, pattern.toArray(new String[0])).setSign(" ", Material.AIR));
+        return setPage(page, new InvBuilder(title, pattern.toArray(new String[0])).setSign(" ", Material.AIR));
     }
 
     /**
@@ -159,7 +159,7 @@ public class Menu {
      * @return 返回自身，创建链式代码
      */
     @NotNull
-    public Menu setButton(InvSetter setter, int slot, Button button) {
+    public Menu setButton(InvBuilder setter, int slot, Button button) {
         if (setter != null && button != null) {
             for (Integer k : setters.keySet()) {
                 if (setters.get(k) == setter) {
@@ -201,7 +201,7 @@ public class Menu {
      * @return 对应的Inventory
      */
     public Inventory getInv(int page) {
-        return setters.get(page).getInv();
+        return setters.get(page).build();
         //
     }
 

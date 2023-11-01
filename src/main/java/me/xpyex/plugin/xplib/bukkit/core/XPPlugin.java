@@ -69,7 +69,7 @@ public abstract class XPPlugin extends JavaPlugin {
             registerListener(new Listener() {
                 @EventHandler
                 public void onJoin(PlayerJoinEvent event) {
-                    ConfigUtil.saveConfig(XPPlugin.this, "players/" + event.getPlayer().getUniqueId() + ".json", GsonUtil.parseStr(defaultPlayerConfig), false);
+                    ConfigUtil.saveConfig(XPPlugin.this, "players/" + event.getPlayer().getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
                 }
             });
         }
@@ -83,7 +83,7 @@ public abstract class XPPlugin extends JavaPlugin {
             }
             if (defaultPlayerConfig != null) {
                 for (Player player : getServer().getOnlinePlayers()) {
-                    ConfigUtil.saveConfig(this, "players/" + player.getUniqueId() + ".json", GsonUtil.parseStr(defaultPlayerConfig), false);
+                    ConfigUtil.saveConfig(this, "players/" + player.getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
                 }
             }
         });
