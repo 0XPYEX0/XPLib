@@ -2,6 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.api;
 
 import java.util.HashMap;
 import java.util.Map;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -83,5 +84,21 @@ public class MapBuilder<K, V> {
     public <M extends Map<K, V>> M build(Class<M> type) {
         return (M) build();
         //
+    }
+
+    /**
+     * 当Map中存在指定key时，在lambda内返回value以执行，方便判空
+     *
+     * @param key 指定的key
+     * @param v   执行的代码内容
+     */
+    public void doIfContainsKey(K key, TryConsumer<V> v) {
+        ValueUtil.ifPresent(map.get(key), v1 -> {
+            try {
+                v.accept(v1);
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

@@ -26,7 +26,7 @@ public class StrUtil extends RootUtil {
      * @return str是否以keys的其中之一开头
      */
     public static boolean startsWithIgnoreCaseOr(String str, String... keys) {
-        if (str == null || keys == null || keys.length == 0) return false;
+        if (str == null || keys == null) return false;
 
         for (String s : keys) {
             if (str.toLowerCase().startsWith(s.toLowerCase())) {
@@ -44,7 +44,7 @@ public class StrUtil extends RootUtil {
      * @return str是否以ends的其中之一结尾
      */
     public static boolean endsWithIgnoreCaseOr(String str, String... ends) {
-        if (str == null || ends == null || ends.length == 0) return false;
+        if (str == null || ends == null) return false;
 
         for (String end : ends) {
             if (str.toLowerCase().endsWith(end.toLowerCase()))
@@ -61,7 +61,7 @@ public class StrUtil extends RootUtil {
      * @return str是否包含关键词其中之一
      */
     public static boolean containsIgnoreCaseOr(String str, String... keys) {
-        if (str == null || keys == null || keys.length == 0) return false;
+        if (str == null || keys == null) return false;
 
         for (String key : keys) {
             if (str.toLowerCase().contains(key.toLowerCase()))
@@ -78,7 +78,7 @@ public class StrUtil extends RootUtil {
      * @return target是否与contents之一相等
      */
     public static boolean equalsIgnoreCaseOr(String target, String... contents) {
-        if (target == null || contents == null || contents.length == 0) return false;
+        if (target == null || contents == null) return false;
 
         for (String s : contents) {
             if (s.equalsIgnoreCase(target))
