@@ -142,11 +142,6 @@ public class XPTask implements Cloneable {
         return this;
     }
 
-    public enum TaskType {
-        SYNC,
-        ASYNC
-    }
-
     @Override
     public XPTask clone() {
         try {
@@ -158,5 +153,10 @@ public class XPTask implements Cloneable {
             cloned.tasks.addAll(tasks);
             return cloned;
         }
+    }
+
+    public enum TaskType {
+        SYNC,
+        ASYNC
     }
 }

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
-import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigUtil extends RootUtil {
@@ -31,7 +30,7 @@ public class ConfigUtil extends RootUtil {
 
     @SuppressWarnings("unchecked")
     public static <T> T getConfig(Plugin plugin, String path, Class<T> type) {
-        String key = plugin.getName() + "/" + path;
+        String key = plugin.getName() + "/" + path + "(" + type.getSimpleName() + ")";
         if (!CONFIGS.containsKey(key)) {
             try {
                 CONFIGS.put(key, GsonUtil.parseJson(FileUtil.readFile(new File(plugin.getDataFolder(), path + ".json")), type));
@@ -63,17 +62,27 @@ public class ConfigUtil extends RootUtil {
     }
 
     public static void saveConfig(Plugin plugin, String path, Object obj, boolean replaced) {
+        saveConfig(plugin, path, obj, replaced, true);
+        //
+    }
+
+    public static void saveConfig(Plugin plugin, String path, Object obj, boolean replaced, boolean cache) {
         File file = new File(plugin.getDataFolder(), path + ".json");
         if (!replaced && file.exists()) return;
         try {
             FileUtil.writeFile(file, GsonUtil.parseStr(obj));
-            CONFIGS.put(plugin.getName() + "/" + path, obj);
+            if (cache) CONFIGS.put(plugin.getName() + "/" + path + "(" + obj.getClass().getSimpleName() + ")", obj);
         } catch (Throwable e) {
             e.printStackTrace();
         }
     }
 
     public static void saveConfig(Plugin plugin, String path, boolean replaced) {
-        ValueUtil.ifPresent(CONFIGS.get(plugin.getName() + "/" + path), config -> saveConfig(plugin, path, config, replaced));
+        for (String key : CONFIGS.keySet()) {
+            if (key.startsWith(plugin.getName() + "/" + path + "(")) {
+                saveConfig(plugin, path, getConfig(plugin, path), true);
+                return;
+            }
+        }
     }
 }
