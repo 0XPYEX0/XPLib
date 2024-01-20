@@ -25,6 +25,11 @@ public class GsonUtil extends RootUtil {
         //
     }
 
+    public static JsonObject parseJsonObject(Object obj) {
+        return parseJsonObject(parseStr(obj));
+        //
+    }
+
     /**
      * 将JSON文本转化为JsonArray
      *
@@ -55,8 +60,11 @@ public class GsonUtil extends RootUtil {
      * @return JSON文本
      */
     public static String parseStr(Object json) {
+        if (json instanceof String) {
+            GsonUtil.parseJsonObject((String) json);  //检查是不是JSON格式
+            return (String) json;
+        }
         return GSON.toJson(json);
-        //
     }
 
     /**
@@ -97,5 +105,10 @@ public class GsonUtil extends RootUtil {
             target.entrySet().forEach(E -> set.add(E.getKey()));
             return set;
         }
+    }
+
+    public static Gson getGson() {
+        return GSON;
+        //
     }
 }

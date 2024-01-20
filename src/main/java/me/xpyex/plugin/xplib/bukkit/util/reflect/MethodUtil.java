@@ -2,6 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.util.reflect;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,11 @@ public class MethodUtil extends RootUtil {
         } catch (ReflectiveOperationException ignored) {
             if (clazz.getSuperclass() != null)
                 return getMethod(clazz.getSuperclass(), name, parmaTypes);
-            throw new NoSuchMethodException(clazz.getSimpleName() + " 类中不存在方法 " + name);
+            String[] typeStr = new String[parmaTypes.length];
+            for (int i = 0; i < parmaTypes.length; i++) {
+                typeStr[i] = parmaTypes[i].getSimpleName();
+            }
+            throw new NoSuchMethodException(clazz.getSimpleName() + " 类中不存在方法 " + name + Arrays.toString(typeStr).replace("[", "(").replace("]", ")"));
         }
     }
 

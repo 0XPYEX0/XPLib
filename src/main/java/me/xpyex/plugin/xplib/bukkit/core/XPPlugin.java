@@ -36,7 +36,6 @@ public abstract class XPPlugin extends JavaPlugin {
     public void registerCmd(String command, @Nullable CommandExecutor executor, @Nullable TabCompleter completer) throws IllegalArgumentException {
         PluginCommand cmd = this.getCommand(command);
         ValueUtil.notNull("未在 plugin.yml 内注册命令: " + command, cmd);
-        assert cmd != null;
 
         cmd.setExecutor(executor);
         cmd.setTabCompleter(completer);
@@ -69,7 +68,9 @@ public abstract class XPPlugin extends JavaPlugin {
             registerListener(new Listener() {
                 @EventHandler
                 public void onJoin(PlayerJoinEvent event) {
-                    ConfigUtil.saveConfig(XPPlugin.this, "players/" + event.getPlayer().getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
+                    getServer().getScheduler().runTaskAsynchronously(XPPlugin.this, () -> {
+                        ConfigUtil.saveConfig(XPPlugin.this, "players/" + event.getPlayer().getUniqueId(), GsonUtil.parseStr(defaultPlayerConfig), false);
+                    });
                 }
             });
         }

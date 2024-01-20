@@ -4,7 +4,7 @@ import java.util.TreeSet;
 import me.xpyex.plugin.xplib.bukkit.util.strings.StrUtil;
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 
-public class Version {
+public class Version implements Comparable<Version> {
     private final int[] versions;
     private final String betaInfo;
     private final String ver;
