@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
+import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigUtil extends RootUtil {
@@ -35,7 +36,7 @@ public class ConfigUtil extends RootUtil {
             try {
                 CONFIGS.put(key, GsonUtil.parseJson(FileUtil.readFile(new File(plugin.getDataFolder(), path + ".json")), type));
             } catch (IOException e) {
-                new IllegalStateException("配置文件访问异常", e).printStackTrace();
+                MsgUtil.debugLog(plugin, new IllegalStateException("配置文件访问异常", e));;
                 return null;
             }
         }
@@ -73,7 +74,7 @@ public class ConfigUtil extends RootUtil {
             FileUtil.writeFile(file, GsonUtil.parseStr(obj));
             if (cache) CONFIGS.put(plugin.getName() + "/" + path + "(" + obj.getClass().getSimpleName() + ")", obj);
         } catch (Throwable e) {
-            e.printStackTrace();
+            MsgUtil.debugLog(plugin, e);
         }
     }
 
