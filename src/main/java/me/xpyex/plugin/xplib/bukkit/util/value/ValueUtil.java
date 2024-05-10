@@ -217,6 +217,7 @@ public class ValueUtil {
             }
             try {
                 if (Array.getLength(o) == 0) return true;  //如果是Object[]，且没有内容
+                continue;  //此项为有内容的Object[]，否则就会走到catch块。已确定类型，直接跳过到下一项
             } catch (IllegalArgumentException ignored) {
             }
             if (o instanceof Map) {

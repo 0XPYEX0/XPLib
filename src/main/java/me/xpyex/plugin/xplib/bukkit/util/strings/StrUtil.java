@@ -1,6 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.util.strings;
 
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
+import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
 
 public class StrUtil extends RootUtil {
     /**
@@ -85,5 +86,29 @@ public class StrUtil extends RootUtil {
                 return true;
         }
         return false;
+    }
+
+    /**
+     * 替换关键词，同时忽略大小写，需要计算
+     *
+     * @param target      需要替换的String
+     * @param replacement 用什么替换关键词
+     * @param keyWord     需要替换的关键词
+     * @return 替换后的String
+     */
+    public static String replaceKeyWordIgnoreCase(String target, String replacement, String... keyWord) {
+        ValueUtil.notNull("需要替换的String为null", target);
+        ValueUtil.notNull("替换String为null", replacement);
+        if (keyWord == null || keyWord.length == 0) return target;
+
+        String result = target;
+        for (String s : keyWord) {
+            while (containsIgnoreCaseOr(result, s)) {  //假设需要替换所有Player，文本中可能第一个是player，第二个是PLayer等极端情况，所以使用while
+                int startIndex = result.toLowerCase().indexOf(s.toLowerCase());
+                int endIndex = startIndex + s.length();
+                result = result.replace(result.substring(startIndex, endIndex), replacement);
+            }
+        }
+        return result;
     }
 }

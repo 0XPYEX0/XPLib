@@ -2,23 +2,23 @@ package me.xpyex.plugin.xplib.bukkit.util.random;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class RandomUtil extends RootUtil {
+    private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
+
     @Nullable
     @SuppressWarnings("unchecked")
     public static <T> T getRandomValue(Collection<T> values) {
-        if (values == null) return null;
+        if (values == null || values.isEmpty()) return null;
+        if (values instanceof List) {
+            List<T> list = (List<T>) values;
+            if (list.size() == 1) return list.get(0);
+            return list.get(getRandomInt(values.size()));
+        }
         return (T) getRandomValue(values.toArray());
-    }
-
-    @Nullable
-    public static <T> T getRandomValue(List<T> values) {
-        if (values == null || values.size() == 0) return null;
-        if (values.size() == 1) return values.get(0);
-        return values.get(getRandomInt(values.size()));
     }
 
     @Nullable
@@ -29,32 +29,32 @@ public class RandomUtil extends RootUtil {
     }
 
     public static int getRandomInt() {
-        return new Random().nextInt();
+        return RANDOM.nextInt();
         //
     }
 
     public static int getRandomInt(int bound) {
-        return new Random().nextInt(bound);
+        return RANDOM.nextInt(bound);
         //
     }
 
     public static boolean getRandomBoolean() {
-        return new Random().nextBoolean();
+        return RANDOM.nextBoolean();
         //
     }
 
     public static float getRandomFloat() {
-        return new Random().nextFloat();
+        return RANDOM.nextFloat();
         //
     }
 
     public static double getRandomDouble() {
-        return new Random().nextDouble();
+        return RANDOM.nextDouble();
         //
     }
 
     public static long getRandomLong() {
-        return new Random().nextLong();
+        return RANDOM.nextLong();
         //
     }
 }

@@ -7,38 +7,39 @@ import org.jetbrains.annotations.NotNull;
 import sun.reflect.Reflection;
 
 public class ClassUtil extends RootUtil {
-    private static final WeakHashMap<String, Class<?>> CACHE = new WeakHashMap<>();
+    private static final WeakHashMap<String, Class<?>> CLASS_CACHE = new WeakHashMap<>();
 
     @NotNull
     public static Class<?> getClass(String name, boolean needInitClass, boolean isDeepSearch) throws ClassNotFoundException {
-        if (!CACHE.containsKey(name)) {
+        if (!CLASS_CACHE.containsKey(name)) {
             try {
-                CACHE.put(name, Class.forName(name, needInitClass, Reflection.getCallerClass().getClassLoader()));
+                CLASS_CACHE.put(name, Class.forName(name, needInitClass, Reflection.getCallerClass().getClassLoader()));
             } catch (ReflectiveOperationException ignored) {
                 try {
-                    CACHE.put(name, Class.forName(name, needInitClass, ClassLoader.getSystemClassLoader()));
+                    CLASS_CACHE.put(name, Class.forName(name, needInitClass, ClassLoader.getSystemClassLoader()));
                 } catch (ReflectiveOperationException ignored1) {
                     try {
-                        CACHE.put(name, Class.forName(name, needInitClass, Bukkit.getServer().getClass().getClassLoader()));
+                        CLASS_CACHE.put(name, Class.forName(name, needInitClass, Bukkit.getServer().getClass().getClassLoader()));
                     } catch (ReflectiveOperationException ignored2) {
                         if (isDeepSearch) {
                             for (Thread thread : Thread.getAllStackTraces().keySet()) {
                                 try {
-                                    CACHE.put(name, Class.forName(name, needInitClass, thread.getContextClassLoader()));
+                                    CLASS_CACHE.put(name, Class.forName(name, needInitClass, thread.getContextClassLoader()));
+                                    return CLASS_CACHE.get(name);
                                 } catch (ReflectiveOperationException ignored3) {
                                 }
                             }
                         }
-                        throw new ClassNotFoundException();
+                        throw new ClassNotFoundException("无法找到类 " + name);
                     }
                 }
             }
         }
-        return CACHE.get(name);
+        return CLASS_CACHE.get(name);
     }
 
     public static void clearCache() {
-        CACHE.clear();
+        CLASS_CACHE.clear();
         //
     }
 }
