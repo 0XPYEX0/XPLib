@@ -57,4 +57,26 @@ public class FieldUtil extends RootUtil {
             return null;
         }
     }
+
+    public static void setObjectField(Object obj, String key, Object value) throws ReflectiveOperationException {
+        Field field = getClassField(obj.getClass(), key);
+        try {
+            boolean accessible = field.isAccessible();
+            field.setAccessible(true);
+            field.set(obj, value);
+            field.setAccessible(accessible);
+        } catch (ReflectiveOperationException ignored) {
+        }
+    }
+
+    public static void setStaticField(Class<?> clazz, String key, Object value) throws ReflectiveOperationException {
+        Field field = getClassField(clazz, key);
+        try {
+            boolean accessible = field.isAccessible();
+            field.setAccessible(true);
+            field.set(null, value);
+            field.setAccessible(accessible);
+        } catch (ReflectiveOperationException ignored) {
+        }
+    }
 }

@@ -36,7 +36,7 @@ public class ConfigUtil extends RootUtil {
             try {
                 CONFIGS.put(key, GsonUtil.parseJson(FileUtil.readFile(new File(plugin.getDataFolder(), path + ".json")), type));
             } catch (IOException e) {
-                MsgUtil.debugLog(plugin, new IllegalStateException("配置文件访问异常", e));;
+                MsgUtil.debugLog(plugin, new IllegalStateException("配置文件访问异常", e));
                 return null;
             }
         }

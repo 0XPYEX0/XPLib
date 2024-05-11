@@ -73,56 +73,12 @@ public class MethodUtil extends RootUtil {
             METHOD_CACHE.put(mapKey, resultMethod);
             return resultMethod;
         }
-        throw new NoSuchMethodException(clazz.getSimpleName() + " 类中不存在方法 " + name + Arrays.toString(getClassNames(paramTypes)).replace("[", "(").replace("]", ")"));
-    }
-
-    @NotNull
-    public static Method AIgetMethod(Class<?> clazz, String name, Class<?>... paramTypes) throws ReflectiveOperationException {
-        ValueUtil.notEmpty("参数不应为空值", clazz, name);
-
-        // 优化缓存键的生成，避免将null参数类型表示为"null"字符串
-        String mapKey = clazz.getName() + "." + name + Arrays.toString(paramTypes == null ? new Class<?>[0] : paramTypes);
-
-        if (METHOD_CACHE.containsKey(mapKey)) {
+        if (clazz.getSuperclass() != null) {
+            METHOD_CACHE.put(mapKey, getMethod(clazz.getSuperclass(), name, paramTypes));
             return METHOD_CACHE.get(mapKey);
         }
-
-        Method resultMethod = null;
-        try {
-            resultMethod = clazz.getDeclaredMethod(name, paramTypes);
-        } catch (NoSuchMethodException e) {
-            // 这里捕获并处理NoSuchMethodException，区分了ReflectiveOperationException的不同类型
-            // 其他ReflectiveOperationException类型的异常仍然会抛出，以便调用者能够处理
-        }
-
-        for (Method declaredMethod : clazz.getDeclaredMethods()) {
-            if (!name.equals(declaredMethod.getName()) || declaredMethod.getParameterTypes().length != paramTypes.length) {
-                continue;
-            }
-
-            boolean isMatch = true;
-            for (int i = 0; i < declaredMethod.getParameterTypes().length; i++) {
-                if (!declaredMethod.getParameterTypes()[i].isAssignableFrom(paramTypes[i])) {
-                    isMatch = false;
-                    break;
-                }
-            }
-
-            if (isMatch) {
-                if (declaredMethod.equals(resultMethod)) {
-                    // 更简洁的逻辑来选择更合适的Method
-                    resultMethod = declaredMethod;
-                }
-            }
-        }
-
-        if (resultMethod != null) {
-            METHOD_CACHE.put(mapKey, resultMethod);
-            return resultMethod;
-        }
-
-        // 提供更详细的错误信息
-        throw new NoSuchMethodException(clazz.getName() + " 类中不存在方法 " + name + Arrays.toString(paramTypes).replace("[", "(").replace("]", ")"));
+        String param = Arrays.toString(getClassNames(paramTypes));
+        throw new NoSuchMethodException(clazz.getName() + " 类中不存在方法 " + name + "(" + param.substring(1, param.length() - 1) + ")");
     }
 
     @NotNull
