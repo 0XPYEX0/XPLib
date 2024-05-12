@@ -1,9 +1,11 @@
 package me.xpyex.plugin.xplib.bukkit;
 
+import java.io.IOException;
 import me.xpyex.plugin.xplib.bukkit.core.XPPlugin;
 import me.xpyex.plugin.xplib.bukkit.inventory.HandleMenu;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
 import me.xpyex.plugin.xplib.bukkit.util.config.ConfigUtil;
+import me.xpyex.plugin.xplib.bukkit.util.files.FileUtil;
 import me.xpyex.plugin.xplib.bukkit.util.value.ValueCacheUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +32,13 @@ public final class XPLib extends XPPlugin {
     public void onEnable() {
         INSTANCE = this;
         getLogger().info("当前服务端核心版本: " + getServer().getBukkitVersion());
-        saveResource("zh_cn.json", false);
+        saveResource("minecraft/zh_cn.json", false);
+        try {
+            if (!getConfigFile().exists())
+                FileUtil.writeFile(getConfigFile(), "{\"Debug\": false}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         registerListener(new HandleMenu());
         registerListener(new Listener() {
             @EventHandler

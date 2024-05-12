@@ -1,5 +1,6 @@
 package me.xpyex.plugin.xplib.bukkit.util.strings;
 
+import com.google.gson.JsonObject;
 import me.xpyex.plugin.xplib.bukkit.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.util.config.ConfigUtil;
 import net.md_5.bungee.api.ChatMessageType;
@@ -54,7 +55,7 @@ public class MsgUtil extends RootUtil {
      * @param throwable 出现的异常
      */
     public static void debugLog(Plugin plugin, Throwable throwable) {
-        if (ConfigUtil.getConfig(plugin) != null && ConfigUtil.getConfig(plugin).has("Debug") && ConfigUtil.getConfig(plugin).get("Debug").getAsBoolean())
+        if (ConfigUtil.getConfig(plugin, JsonObject.class) != null && ConfigUtil.getConfig(plugin, JsonObject.class).has("Debug") && ConfigUtil.getConfig(plugin, JsonObject.class).get("Debug").getAsBoolean())
             throwable.printStackTrace();
     }
 

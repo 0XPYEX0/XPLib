@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
+import me.xpyex.plugin.xplib.bukkit.api.TryCallable;
+import me.xpyex.plugin.xplib.bukkit.util.strings.MsgUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class ValueUtil {
@@ -93,7 +96,7 @@ public class ValueUtil {
      * @return 返回安全的值，不会出现空指针
      */
     @NotNull
-    public static <T> T getOrDefault(Callable<T> callable, T defaulted, String errMsg) {
+    public static <T> T getOrDefault(TryCallable<T> callable, T defaulted, String errMsg) {
         notNull("Default参数不应为空", defaulted);
         if (callable == null) {
             return defaulted;
@@ -101,7 +104,7 @@ public class ValueUtil {
         try {
             return getOrDefault(callable.call(), defaulted);
         } catch (Throwable e) {
-            new Throwable(errMsg, e).printStackTrace();
+            MsgUtil.debugLog(XPLib.getInstance(), new Throwable(errMsg, e));
             return defaulted;
         }
     }
@@ -114,7 +117,7 @@ public class ValueUtil {
      * @return 返回安全的值，不会出现空指针
      */
     @NotNull
-    public static <T> T getOrDefault(Callable<T> callable, T defaulted) {
+    public static <T> T getOrDefault(TryCallable<T> callable, T defaulted) {
         return getOrDefault(callable, defaulted, "在执行XPLib的 ValueUtil.getOrDefault(Callable, Object) 方法时，callable过程出现错误: ");
         //
     }

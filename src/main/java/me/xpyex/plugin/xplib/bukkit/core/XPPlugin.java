@@ -125,14 +125,4 @@ public abstract class XPPlugin extends JavaPlugin {
         return ConfigUtil.getConfig(this, type);
         //
     }
-
-    public String getI18N(String key) {
-        return getI18N(Locale.getDefault(), key);
-        //
-    }
-
-    public String getI18N(Locale locale, String key) {
-        NationalMessage config = ConfigUtil.getConfig(this, "messages/" + locale.getLanguage(), NationalMessage.class);
-        return "Uncompleted";
-    }
 }

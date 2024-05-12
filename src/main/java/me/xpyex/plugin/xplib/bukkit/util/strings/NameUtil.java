@@ -21,7 +21,7 @@ public class NameUtil extends RootUtil {
 
     static {
         try {
-            File f = new File(XPLib.getInstance().getDataFolder(), "zh_cn.json");
+            File f = new File(XPLib.getInstance().getDataFolder(), "minecraft/zh_cn.json");
             ZH_CN = GsonUtil.parseJsonObject(FileUtil.readFile(f));
         } catch (Throwable e) {
             e.printStackTrace();
