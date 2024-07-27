@@ -32,25 +32,39 @@ public class HandleMenu implements Listener {
             }
             return;
         }
-        Button button = menu.getButton(event.getSlot());
-        if (button == null) {
-            event.setCancelled(true);
-            return;
-        }
-        ButtonClickEffect clickEffect = button.getClickEffect();
-        if (clickEffect != null) {
-            clickEffect.click(whoClicked, event.getClick(), event.getCurrentItem());
-        }
-        if (button instanceof UnmodifiableButton) {
-            event.setCancelled(true);
-        } else if (button instanceof ModifiableButton) {
-            ButtonReturnItem returnItemEffect = ((ModifiableButton) button).getReturnItem();
-            if (returnItemEffect != null) {
-                ItemStack item = returnItemEffect.returnItem(whoClicked, event.getClick(), event.getCurrentItem());
-                ((ModifiableButton) button).setStack(item);
-                event.getClickedInventory().setItem(event.getSlot(), item);
-            } else {
-                ((ModifiableButton) button).setStack(event.getCurrentItem());
+        if (event.getClickedInventory() != whoClicked.getInventory()) {  //玩家点击的是Menu，才能拿到Button，接下去的操作才有意义
+            Button button = menu.getButton(event.getSlot());
+            if (button == null) {  //假设点击的不是Menu里的Button，那就是装饰格
+                event.setCancelled(true);
+                return;
+            }
+            //往下，即玩家点击的是Menu里的Button格
+
+            ButtonClickEffect clickEffect = button.getClickEffect();
+            if (clickEffect != null) {
+                try {
+                    clickEffect.click(whoClicked, event.getClick(), event.getCurrentItem());
+                } catch (Throwable e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+            if (button instanceof UnmodifiableButton) {
+                event.setCancelled(true);
+            } else if (button instanceof ModifiableButton) {
+                ButtonReturnItem returnItemEffect = ((ModifiableButton) button).getReturnItem();
+                if (returnItemEffect != null) {
+                    ItemStack item;
+                    try {
+                        item = returnItemEffect.returnItem(whoClicked, event.getClick(), event.getCurrentItem());
+                    } catch (Throwable e) {
+                        throw new IllegalStateException(e);
+                    }
+                    ((ModifiableButton) button).setStack(item);
+                    event.getClickedInventory().setItem(event.getSlot(), item);
+                } else {
+                    ((ModifiableButton) button).setStack(event.getCurrentItem());  //光标道具放到格子里
+                    event.setCurrentItem(null);  //清除光标道具
+                }
             }
         }
         menu.updateInventory();  //实时更新

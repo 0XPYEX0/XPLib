@@ -1,7 +1,7 @@
 package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
+import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

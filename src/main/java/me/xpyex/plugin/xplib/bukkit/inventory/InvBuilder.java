@@ -2,7 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.inventory;
 
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.inventory.button.Button;
-import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
+import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -77,7 +77,7 @@ public class InvBuilder {
     }
 
     /**
-     * 以此InvSetter构造Inventory
+     * 以此InvBuilder构造Inventory
      *
      * @return 构造后的Inventory
      */
@@ -87,10 +87,13 @@ public class InvBuilder {
             String line = pattern[i];
             slot = i * 9;
             for (String sign : line.split("")) {
-                ValueUtil.mustTrue("存在未定义的符号: " + sign, signMap.containsKey(sign));
-                inv.setItem(slot, signMap.get(sign));
-                if (buttonMap.containsKey(sign)) {
-                    buttonMap.get(sign).getMenu().setButton(this, slot, buttonMap.get(sign));
+                ItemStack signStack = signMap.get(sign);
+                ValueUtil.mustTrue("存在未定义的符号: " + sign, signStack != null);
+                inv.setItem(slot, signStack);
+
+                Button button = buttonMap.get(sign);
+                if (button != null) {
+                    button.getMenu().setButton(this, slot, button);
                 }
                 slot++;
             }

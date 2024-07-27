@@ -8,5 +8,5 @@ import org.bukkit.inventory.ItemStack;
  * 点击按钮所执行的方法体
  */
 public interface ButtonClickEffect {
-    void click(Player player, ClickType action, ItemStack i);
+    void click(Player player, ClickType action, ItemStack i) throws Throwable;
 }

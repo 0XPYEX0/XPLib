@@ -2,7 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.inventory.button;
 
 import java.util.HashMap;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
+import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -2,7 +2,7 @@ package me.xpyex.plugin.xplib.bukkit.inventory;
 
 /**
  * @deprecated 已过时
- * 请使用 {@link me.xpyex.plugin.xplib.bukkit.inventory.InvBuilder}
+ * 请使用 {@link InvBuilder}
  */
 @Deprecated
 public class InvSetter extends InvBuilder {

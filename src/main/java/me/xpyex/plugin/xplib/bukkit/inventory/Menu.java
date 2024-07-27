@@ -3,9 +3,9 @@ package me.xpyex.plugin.xplib.bukkit.inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-import me.xpyex.plugin.xplib.bukkit.api.Pair;
+import me.xpyex.plugin.xplib.api.Pair;
 import me.xpyex.plugin.xplib.bukkit.inventory.button.Button;
-import me.xpyex.plugin.xplib.bukkit.util.value.ValueUtil;
+import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -192,6 +192,7 @@ public class Menu {
      */
     public int getOpeningPage() {
         return openingPage;
+        //
     }
 
     /**
