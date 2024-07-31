@@ -1,10 +1,10 @@
 package me.xpyex.plugin.xplib.util.tasks;
 
-import me.xpyex.plugin.xplib.XPLib;
 import me.xpyex.plugin.xplib.api.TryCallable;
 import me.xpyex.plugin.xplib.api.TryRunnable;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
+import me.xpyex.plugin.xplib.bukkit.strings.MsgUtil;
 import me.xpyex.plugin.xplib.util.RootUtil;
-import me.xpyex.plugin.xplib.util.strings.MsgUtil;
 import me.xpyex.plugin.xplib.util.value.ValueUtil;
 
 public class TaskUtil extends RootUtil {

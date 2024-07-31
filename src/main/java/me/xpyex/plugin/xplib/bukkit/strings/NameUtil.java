@@ -1,12 +1,12 @@
-package me.xpyex.plugin.xplib.util.strings;
+package me.xpyex.plugin.xplib.bukkit.strings;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import java.io.File;
-import me.xpyex.plugin.xplib.XPLib;
-import me.xpyex.plugin.xplib.util.RootUtil;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.bukkit.config.GsonUtil;
+import me.xpyex.plugin.xplib.util.RootUtil;
 import me.xpyex.plugin.xplib.util.files.FileUtil;
 import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Material;

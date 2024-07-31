@@ -6,7 +6,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import me.xpyex.plugin.xplib.util.RootUtil;
@@ -110,5 +112,17 @@ public class GsonUtil extends RootUtil {
     public static Gson getGson() {
         return GSON;
         //
+    }
+
+    public static List<JsonElement> arrayAsList(JsonArray array) {
+        try {
+            return array.asList();
+        } catch (NoSuchMethodError e) {
+            List<JsonElement> list = new ArrayList<>();
+            for (int i = 0; i < array.size(); i++) {
+                list.add(array.get(i));
+            }
+            return list;
+        }
     }
 }

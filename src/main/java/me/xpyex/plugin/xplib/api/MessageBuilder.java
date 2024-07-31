@@ -1,7 +1,7 @@
 package me.xpyex.plugin.xplib.api;
 
 import java.util.ArrayList;
-import me.xpyex.plugin.xplib.util.strings.MsgUtil;
+import me.xpyex.plugin.xplib.bukkit.strings.MsgUtil;
 import org.bukkit.command.CommandSender;
 
 /**

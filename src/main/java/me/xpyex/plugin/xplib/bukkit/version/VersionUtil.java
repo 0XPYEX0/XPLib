@@ -1,7 +1,7 @@
-package me.xpyex.plugin.xplib.util.version;
+package me.xpyex.plugin.xplib.bukkit.version;
 
-import me.xpyex.plugin.xplib.XPLib;
 import me.xpyex.plugin.xplib.api.Version;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.util.RootUtil;
 import org.bukkit.Bukkit;
 

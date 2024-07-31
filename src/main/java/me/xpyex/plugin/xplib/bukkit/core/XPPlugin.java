@@ -1,4 +1,4 @@
-package me.xpyex.plugin.xplib.core;
+package me.xpyex.plugin.xplib.bukkit.core;
 
 import com.google.gson.JsonObject;
 import java.io.File;

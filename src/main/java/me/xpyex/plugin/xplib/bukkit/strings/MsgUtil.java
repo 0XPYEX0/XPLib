@@ -1,8 +1,8 @@
-package me.xpyex.plugin.xplib.util.strings;
+package me.xpyex.plugin.xplib.bukkit.strings;
 
 import com.google.gson.JsonObject;
-import me.xpyex.plugin.xplib.util.RootUtil;
 import me.xpyex.plugin.xplib.bukkit.config.ConfigUtil;
+import me.xpyex.plugin.xplib.util.RootUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;

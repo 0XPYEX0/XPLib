@@ -2,12 +2,12 @@ package me.xpyex.plugin.xplib.bukkit.scheduler;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
-import me.xpyex.plugin.xplib.XPLib;
 import me.xpyex.plugin.xplib.api.Pair;
 import me.xpyex.plugin.xplib.api.TryCallable;
 import me.xpyex.plugin.xplib.api.TryConsumer;
 import me.xpyex.plugin.xplib.api.TryFunction;
 import me.xpyex.plugin.xplib.api.TryRunnable;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Contract;

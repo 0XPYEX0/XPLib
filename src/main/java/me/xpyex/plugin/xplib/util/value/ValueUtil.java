@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
-import me.xpyex.plugin.xplib.XPLib;
 import me.xpyex.plugin.xplib.api.TryCallable;
-import me.xpyex.plugin.xplib.util.strings.MsgUtil;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
+import me.xpyex.plugin.xplib.bukkit.strings.MsgUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class ValueUtil {

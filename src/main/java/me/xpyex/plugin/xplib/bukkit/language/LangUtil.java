@@ -8,11 +8,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
-import me.xpyex.plugin.xplib.XPLib;
 import me.xpyex.plugin.xplib.api.Pair;
-import me.xpyex.plugin.xplib.core.XPPlugin;
-import me.xpyex.plugin.xplib.util.RootUtil;
+import me.xpyex.plugin.xplib.bukkit.XPLib;
 import me.xpyex.plugin.xplib.bukkit.config.ConfigUtil;
+import me.xpyex.plugin.xplib.bukkit.config.GsonUtil;
+import me.xpyex.plugin.xplib.bukkit.core.XPPlugin;
+import me.xpyex.plugin.xplib.util.RootUtil;
 import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -72,7 +73,7 @@ public class LangUtil extends RootUtil {
         Pair<JsonObject, String> pair = getFinalJsonObj(plugin, key);
         if (pair != null) {
             if (pair.getKey().has(pair.getValue())) {
-                return pair.getKey().get(pair.getValue()).getAsJsonArray().asList().stream().map(JsonElement::getAsString).collect(Collectors.toList());
+                return GsonUtil.arrayAsList(pair.getKey().get(pair.getValue()).getAsJsonArray()).stream().map(JsonElement::getAsString).collect(Collectors.toList());
             }
         }
         return Collections.emptyList();

@@ -4,9 +4,9 @@ import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import me.xpyex.plugin.xplib.bukkit.strings.MsgUtil;
 import me.xpyex.plugin.xplib.util.RootUtil;
 import me.xpyex.plugin.xplib.util.files.FileUtil;
-import me.xpyex.plugin.xplib.util.strings.MsgUtil;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigUtil extends RootUtil {

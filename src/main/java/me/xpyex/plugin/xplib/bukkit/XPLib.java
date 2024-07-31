@@ -1,12 +1,12 @@
-package me.xpyex.plugin.xplib;
+package me.xpyex.plugin.xplib.bukkit;
 
 import java.io.IOException;
-import me.xpyex.plugin.xplib.core.XPPlugin;
+import me.xpyex.plugin.xplib.bukkit.config.ConfigUtil;
+import me.xpyex.plugin.xplib.bukkit.core.XPPlugin;
 import me.xpyex.plugin.xplib.bukkit.inventory.HandleMenu;
 import me.xpyex.plugin.xplib.bukkit.inventory.Menu;
-import me.xpyex.plugin.xplib.bukkit.config.ConfigUtil;
+import me.xpyex.plugin.xplib.bukkit.value.ValueCacheUtil;
 import me.xpyex.plugin.xplib.util.files.FileUtil;
-import me.xpyex.plugin.xplib.util.value.ValueCacheUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;

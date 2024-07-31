@@ -1,8 +1,8 @@
 package me.xpyex.plugin.xplib.bukkit.inventory;
 
 import java.util.ArrayList;
+import me.xpyex.plugin.xplib.bukkit.strings.MsgUtil;
 import me.xpyex.plugin.xplib.util.RootUtil;
-import me.xpyex.plugin.xplib.util.strings.MsgUtil;
 import me.xpyex.plugin.xplib.util.strings.StrUtil;
 import me.xpyex.plugin.xplib.util.value.ValueUtil;
 import org.bukkit.Material;
