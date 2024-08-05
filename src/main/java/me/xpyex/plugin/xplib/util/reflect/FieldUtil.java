@@ -58,6 +58,11 @@ public class FieldUtil extends RootUtil {
         }
     }
 
+    @Nullable
+    public static <T> T getStaticField(String className, String key) throws ReflectiveOperationException {
+        return getStaticField(ClassUtil.getClass(className, true, false), key);
+    }
+
     public static void setObjectField(Object obj, String key, Object value) throws ReflectiveOperationException {
         Field field = getClassField(obj.getClass(), key);
         try {
@@ -77,6 +82,25 @@ public class FieldUtil extends RootUtil {
             field.set(null, value);
             field.setAccessible(accessible);
         } catch (ReflectiveOperationException ignored) {
+        }
+    }
+
+    public static <T> void copyObjectFields(T origin, T target, Class<?> clazz) {
+        for (Field declaredField : clazz.getDeclaredFields()) {  //仅复制该Class变量
+            String fieldName = declaredField.getName();
+            try {
+                setObjectField(target, fieldName, getObjectField(origin, fieldName));
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static <T> void copyObjectFields(T origin, T target) {
+        Class<?> clazz = origin.getClass();
+        while (clazz != null && clazz != Object.class) {  //去找所有父类的字段复制
+            copyObjectFields(origin, target, clazz);
+            clazz = clazz.getSuperclass();
         }
     }
 }

@@ -2,7 +2,6 @@ package me.xpyex.plugin.xplib.util.reflect;
 
 import java.util.WeakHashMap;
 import me.xpyex.plugin.xplib.util.RootUtil;
-import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import sun.reflect.Reflection;
 
@@ -18,20 +17,16 @@ public class ClassUtil extends RootUtil {
                 try {
                     CLASS_CACHE.put(name, Class.forName(name, needInitClass, ClassLoader.getSystemClassLoader()));
                 } catch (ReflectiveOperationException ignored1) {
-                    try {
-                        CLASS_CACHE.put(name, Class.forName(name, needInitClass, Bukkit.getServer().getClass().getClassLoader()));
-                    } catch (ReflectiveOperationException ignored2) {
-                        if (isDeepSearch) {
-                            for (Thread thread : Thread.getAllStackTraces().keySet()) {
-                                try {
-                                    CLASS_CACHE.put(name, Class.forName(name, needInitClass, thread.getContextClassLoader()));
-                                    return CLASS_CACHE.get(name);
-                                } catch (ReflectiveOperationException ignored3) {
-                                }
+                    if (isDeepSearch) {
+                        for (Thread thread : Thread.getAllStackTraces().keySet()) {
+                            try {
+                                CLASS_CACHE.put(name, Class.forName(name, needInitClass, thread.getContextClassLoader()));
+                                return CLASS_CACHE.get(name);
+                            } catch (ReflectiveOperationException ignored3) {
                             }
                         }
-                        throw new ClassNotFoundException("无法找到类 " + name);
                     }
+                    throw new ClassNotFoundException("无法找到类 " + name);
                 }
             }
         }
